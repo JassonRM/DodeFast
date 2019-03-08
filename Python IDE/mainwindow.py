@@ -83,4 +83,4 @@ class Ui_MainWindow(object):
         self.menuPython_IDE.setTitle(_translate("MainWindow", "Python IDE"))
 
     def compileBtnPressed(self):
-        plyparser.start()
+        plyparser.start(self.plainTextEdit.toPlainText())
