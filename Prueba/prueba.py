@@ -1,6 +1,7 @@
 import ply.lex as lex
 reservadas=['DCL', 'EnCaso', 'Cuando','EnToncs', 'SiNo', 'Fin_EnCaso', 'Repita', 'HastaEncontrar', 'Desde', 'Hasta',
-              'Haga', 'Fin_Desde', 'LLamar','Inicio', 'Final', 'Proc']
+              'Haga', 'Fin_Desde', 'LLamar','Inicio', 'Final', 'Proc','AF','A','F','DFA','IFA','DFB','IFB','DAA',
+            'IAA','DAB','IAB','AA']
 tokens = reservadas+['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
           'DIVIDE', 'LPARENT', 'RPARENT','NUMBER','RKEY','LKEY',
           'SEMMICOLOM' ,'ASSIGN']
@@ -42,7 +43,7 @@ def t_NUMBER(t):
     return t
 
 analizador = lex.lex()
-analizador.input('n==4;{}EnCaso Hasta Fin_Desde')
+analizador.input('n==4;{}EnCaso Hasta Fin_Desde AF')
 
 while True:
     tok = analizador.token()
