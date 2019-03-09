@@ -19,12 +19,13 @@ def p_DCLDeclEmpty(p):
     'DCLDecl : empty'
     #p[0]=Null()
     print("Nulo")
-def p_identList1(p):
-    'identlist : ID'
-    print("ID1")
-def p_identList2(p):
-    'identList : identList ID'
-    print("ID2")
+    #ESTO GENERABA PROBLEMAS YA QUE SE HACIA INFINITO LEL
+# def p_identList1(p):
+#     'identlist : ID'
+#     print("ID1")
+# def p_identList2(p):
+#     'identList : identList ID'
+#     print("ID2")
 def p_procDecl(p):
     'procDecl : procDecl Proc ID  '
     print("proc")
@@ -78,10 +79,9 @@ def p_relation6(p):
     'relation : GTE'
 def p_expression1(p):
     'expression : term'
-def p_expression2(p):
-    'expression : addingOperator term'
+
 def p_expression3(p):
-    'expression : expression addingOperator term'
+    'expression : expression PLUS term'  #aqui generaba otro error ya que antes tenia plus algo y el comando de sumar es plus
 def p_term1(p):
     'term : factor'
 def p_term2(p):
