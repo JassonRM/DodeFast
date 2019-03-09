@@ -41,9 +41,8 @@ def t_NUMBER(t):
     r'\d+'
     t.value=int(t.value)
     return t
-
 analizador = lex.lex()
-analizador.input('n==4;{}EnCaso Hasta Fin_Desde AF asas DEFAULT')
+analizador.input('n==4;{}EnCaso Hasta Fin_Desde AF asas DEFAULT /     ')
 
 while True:
     tok = analizador.token()

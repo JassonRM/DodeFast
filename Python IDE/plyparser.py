@@ -112,4 +112,7 @@ def start(data):
         if not tok:
             break  # No more input
         toks.append(tok)
+        print(tok)
     return toks
+
+start("Haga EnToncs Repita + =")
