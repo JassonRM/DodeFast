@@ -1,24 +1,18 @@
 import ply.lex as lex
-import re
-import codecs
-import os
-import sys
-
-tokens = ['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
+reservadas=['DCL', 'EnCaso', 'Cuando','EnToncs', 'SiNo', 'Fin_EnCaso', 'Repita', 'HastaEncontrar', 'Desde', 'Hasta',
+              'Haga', 'Fin_Desde', 'LLamar','Inicio', 'Final', 'Proc']
+tokens = reservadas+['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
           'DIVIDE', 'LPARENT', 'RPARENT','NUMBER','RKEY','LKEY',
           'SEMMICOLOM' ,'ASSIGN']
-reservadas = ['DCL', 'EnCaso', 'Cuando', 'EnToncs', 'SiNo', 'Fin-EnCaso', 'Repita', 'HastaEncontrar', 'Desde', 'Hasta',
-              'Haga', 'Fin-Desde', 'LLamar',
-              'Inicio', 'Final', 'Proc']
 t_ignore = '\t '
 t_PLUS = r'\+'
-t_ASSIGN = r'=='
+t_ASSIGN = r'='
 t_LKEY=r'\{'
 t_RKEY=r'\}'
 t_MINUS = r'\-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
-t_EQUAL = r'='
+t_EQUAL = r'=='
 t_GT = r'>'
 t_LT = r'<'
 t_NE = r'<>'
@@ -29,14 +23,13 @@ t_RPARENT = r'\)'
 t_SEMMICOLOM = r';'
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_#@]*'
-    if t.value.upper() in reservadas:
-        t.value = t.value.upper()
+    if t.value in reservadas:
         t.type = t.value
     return t
 
 
 def t_error(t):
-    print('Caracter invalido' + t.value[0])
+    print('Caracter invalido ' + t.value[0])
     t.lexer.skip(1)
 
 
@@ -49,7 +42,7 @@ def t_NUMBER(t):
     return t
 
 analizador = lex.lex()
-analizador.input('n==4;{}')
+analizador.input('n==4;{}EnCaso Hasta Fin_Desde')
 
 while True:
     tok = analizador.token()
