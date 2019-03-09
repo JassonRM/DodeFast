@@ -1,0 +1,41 @@
+DCL A;
+DCL B DEFAULT 100;
+EnCaso
+Cuando Identificador Condicion Sentencia EnTons { expresión }
+Cuando Identificador Condicion Sentencia EnTons { expresión }
+....
+SiNo
+{ expresión }
+Fin-EnCaso;
+Sintaxis 2:
+EnCaso Identificador
+Cuando Condición Sentencia EnTons { expresión }
+Cuando Condición Sentencia EnTons { expresión }
+....
+SiNo
+{ expresión }
+Fin-EnCaso;
+
+Repita sentencias
+HastaEncontrar expresión;
+
+Desde Identificador:= exp1 Hasta exp2 Haga Sentencias
+Fin-Desde;
+
+Inc(A, B)
+
+Dec(A, B)
+
+Ini(A,B)
+
+Mover(A)
+
+Aleatorio()
+
+ProcNombreProc (Parametros) DCL ... (opcional)
+Inicio: Expresión
+Final;
+
+Llamar NombreProc (Parametros);
+
+Llamar NombreProc (Parametros);
