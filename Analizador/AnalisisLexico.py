@@ -1,6 +1,6 @@
 import ply.lex as lex
-reservadas=['DCL', 'EnCaso', 'Cuando','EnToncs', 'SiNo', 'Fin_EnCaso', 'Repita', 'HastaEncontrar', 'Desde', 'Hasta',
-              'Haga', 'Fin_Desde', 'Llamar','Inicio', 'Final', 'Proc','AF','A','F','DFA','IFA','DFB','IFB','DAA',
+reservadas=['DCL', 'ENCASO', 'CUANDO','ENTONCS', 'SINO', 'FINENCASO', 'REPITA', 'HASTAENCONTRAR', 'DESDE', 'HASTA',
+              'HAGA', 'FINDESDE', 'LLAMAR','INICIO', 'FINAL', 'PROC','AF','A','F','DFA','IFA','DFB','IFB','DAA',
             'IAA','DAB','IAB','AA','DEFAULT']
 tokens = reservadas+['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
           'DIVIDE', 'LPARENT', 'RPARENT','NUMBER','RKEY','LKEY',
@@ -24,7 +24,14 @@ t_RPARENT = r'\)'
 t_SEMMICOLOM = r';'
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_#@]*'
-    if t.value in reservadas:
+    if t.value=='Fin-Desde':
+        t.value='FINDESDE'
+        t.type = t.value
+    elif t.value=='Fin-EnCaso':
+        t.value='FINENCASO'
+        t.type = t.value
+    elif t.value.upper() in reservadas:
+        t.value=t.value.upper()
         t.type = t.value
     return t
 
@@ -42,7 +49,7 @@ def t_NUMBER(t):
     t.value=int(t.value)
     return t
 analizador = lex.lex()
-analizador.input('n==4;{}EnCaso Hasta Fin_Desde AF asas DEFAULT /     ')
+analizador.input('n==4;{}EnCaso Hasta Fin-Desde AF asas DEFAULT /     ')
 
 while True:
     tok = analizador.token()
