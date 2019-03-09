@@ -45,5 +45,5 @@ def p_error(p):
 
 # Build the parser
 parser = yacc.yacc()
-result = parser.parse("x*1")
+result = parser.parse("ENCASO asasa FINENCASO")
 print(result)

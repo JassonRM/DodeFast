@@ -77,6 +77,7 @@ def p_factor2(p):
     print("NUMBER")
 def p_factor3(p):
     'factor : LPARENT expression RPARENT'
+    print("22")
 def p_empty(p):
     'empty : '
     pass
@@ -84,4 +85,4 @@ def p_error(p):
     print("Error de Sintaxis")
     print("Error en la linea: "+str(p.lineno))
 parser = yacc.yacc()
-parser.parse('DCL x')
+parser.parse('(x=4)')
