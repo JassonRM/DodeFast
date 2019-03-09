@@ -1,7 +1,6 @@
 import ply.lex as lex
 reservadas=['DCL', 'EnCaso', 'Cuando','EnToncs', 'SiNo', 'Fin_EnCaso', 'Repita', 'HastaEncontrar', 'Desde', 'Hasta',
-              'Haga', 'Fin_Desde', 'Llamar','Inicio', 'Final', 'Proc','AF','A','F','DFA','IFA','DFB','IFB','DAA',
-            'IAA','DAB','IAB','AA','DEFAULT']
+              'Haga', 'Fin_Desde', 'Llamar','Inicio', 'Final', 'Proc']
 tokens = reservadas+['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
           'DIVIDE', 'LPARENT', 'RPARENT','NUMBER','RKEY','LKEY',
           'SEMMICOLOM' ,'ASSIGN']
