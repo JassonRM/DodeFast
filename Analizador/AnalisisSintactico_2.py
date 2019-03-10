@@ -55,7 +55,7 @@ parser = yacc.yacc()
 
 while True:
     try:
-        s = raw_input('x=1+1 ')
+        s = raw_input('1+1 ')
     except EOFError:
         break
     if not s: continue
