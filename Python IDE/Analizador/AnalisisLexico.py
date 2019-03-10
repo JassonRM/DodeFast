@@ -1,6 +1,6 @@
 import ply.lex as lex
-reservadas=['DCL', 'ENCASO', 'CUANDO','ENTONCES', 'SINO', 'FINENCASO', 'REPITA', 'HASTAENCONTRAR', 'DESDE', 'HASTA',
-              'HAGA', 'FINDESDE', 'LLAMAR','INICIO', 'FINAL', 'PROC','AF','A','F','DFA','IFA','DFB','IFB','DAA',
+reservadas=['DCL', 'EnCaso', 'Cuando','EnTons', 'SiNo', 'FINENCASO', 'Repita', 'HastaEncontrar', 'Desde', 'Hasta',
+              'Haga', 'FINDESDE', 'Llamar','Inicio', 'Final', 'Proc','AF','A','F','DFA','IFA','DFB','IFB','DAA',
             'IAA','DAB','IAB','AA','DEFAULT']
 tokens = reservadas+['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
           'DIVIDE', 'LPARENT', 'RPARENT','NUMBER','RKEY','LKEY',
@@ -34,8 +34,7 @@ def t_FinDesde(t):
     return t
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_#@]*'
-    if t.value.upper()in reservadas:
-        t.value=t.value.upper()
+    if t.value in reservadas:
         t.type = t.value
     return t
 def t_error(t):

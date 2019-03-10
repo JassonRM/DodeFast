@@ -1,7 +1,6 @@
 import ply.yacc as yacc
 
 # Get the token map from the lexer.  This is required.
-from Analizador.AnalisisLexico import tokens
 
 def p_expression_plus(p):
     'expression : expression PLUS term'
