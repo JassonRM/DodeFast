@@ -1,5 +1,5 @@
 import ply.yacc as yacc
-
+from
 # Get the token map from the lexer.  This is required.
 # def p_exp(p):
 #     '''expression : NUMBER'''
@@ -43,12 +43,5 @@ def p_epsilon(p):
     '''
     p[0] = None
 parser = yacc.yacc()
-
-# while True:
-    #try:
-      #  s = raw_input('1+1 ')
-    # except EOFError:
-    #     break
-    #if not s: continue
 result = parser.parse("Inicio \n EnCaso \n Cuando \n juan < 12 EnTons \n { Maria } \n Cuando \n Mario < 12 EnTons \n { Juana }\n SiNo \n {  MAMELA } \n Fin_EnCaso ; \n Final")
 print("LOL")
