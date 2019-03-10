@@ -4,63 +4,43 @@ import codecs
 import re
 from Analizador.AnalisisLexico import tokens
 from sys import stdin
-precedence=(
-    ('right','ASSIGN'),
-    ('right','EQUAL'),
-    ('left','NE'),
-    ('left','LT','LTE','GT','GTE'),
-    ('left','PLUS','MINUS'),
-    ('left','TIMES','DIVIDE'),
-    ('left','LPARENT','RPARENT'),
-    ('left','RKEY','LKEY'))
 def p_DCLDecl(p):
     'DCLDecl : DCL ID'
+    print("DCL")
 def p_DCLDeclEmpty(p):
     'DCLDecl : empty'
-    #p[0]=Null()
     print("Nulo")
-    #ESTO GENERABA PROBLEMAS YA QUE SE HACIA INFINITO LEL
-# def p_identList1(p):
-#     'identlist : ID'
-#     print("ID1")
-# def p_identList2(p):
-#     'identList : identList ID'
-#     print("ID2")
 def p_procDecl(p):
-    'procDecl : procDecl Proc ID  '
+    'procDecl : procDecl PROC ID  '
     print("proc")
 def p_procDelEmpty(p):
-    '  procDecl : empty  '
+    'procDecl : empty'
     print("nulo")
 def p_statement(p):
     'statement : ID ASSIGN expression'
     print("s1")
 def p_statement2(p):
-    ' statement : Llamar ID'
+    ' statement : LLAMAR ID'
     print("s2")
 def p_statement3(p):
-    'statement : Inicio statementList Final'
+    'statement : INICIO statement FINAL'
     print("s3")
 def p_statement4(p):
-    'statement : Cuando  ID condition EnToncs LKEY statementList RKEY'
+    'statement : CUANDO ID condition ENTONCS LKEY statement RKEY'
 def p_statement41(p):
-    'statement : Cuando condition EnToncs LKEY statementList RKEY'
+    'statement : CUANDO condition ENTONCS LKEY statement RKEY'
 def p_statement5(p):
-    'statement : EnCaso statementList Fin_EnCaso'
+    'statement : ENCASO statement FINENCASO'
     print("s5")
 def p_statement11(p):
-    'statement : EnCaso ID statementList Fin_EnCaso'
+    'statement : ENCASO ID statement FINENCASO'
     print("s5")
 def p_statement7(p):
-    'statement : Repita statementList HastaEncontrar condition'
+    'statement : REPITA statement HASTAENCONTRAR condition'
 def p_statement8(p):
-    'statement : Desde DCL Hasta condition Haga statementList Fin_Desde'
+    'statement : DESDE DCL HASTA condition HAGA statement FINDESDE'
 def p_statementEmpty(p):
     'statement : empty'
-def p_statementList1(p):
-    'statementList : statement'
-def p_statementList2(p):
-    'statement : statementList statement'
 def p_condition(p):
     'condition : expression relation expression'
 def p_relation1(p):
@@ -69,6 +49,7 @@ def p_relation(p):
     'relation : NE'
 def p_relation2(p):
     'relation : EQUAL'
+    print("igual")
 def p_relation3(p):
     'relation : LT'
 def p_relation4(p):
@@ -79,7 +60,6 @@ def p_relation6(p):
     'relation : GTE'
 def p_expression1(p):
     'expression : term'
-
 def p_expression3(p):
     'expression : expression PLUS term'  #aqui generaba otro error ya que antes tenia plus algo y el comando de sumar es plus
 def p_term1(p):
@@ -94,14 +74,15 @@ def p_factor(p):
     'factor : ID'
 def p_factor2(p):
     'factor : NUMBER'
+    print("NUMBER")
 def p_factor3(p):
     'factor : LPARENT expression RPARENT'
+    print("22")
 def p_empty(p):
     'empty : '
     pass
 def p_error(p):
     print("Error de Sintaxis")
-    print("Rrror en la linea: "+str(p.lineno))
+    print("Error en la linea: "+str(p.lineno))
 parser = yacc.yacc()
-result = parser.parse("DCL d=3")
-print(result)
+parser.parse('(x=4)')
