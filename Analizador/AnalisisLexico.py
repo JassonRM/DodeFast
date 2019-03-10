@@ -51,7 +51,7 @@ def t_NUMBER(t):
     t.value=int(t.value)
     return t
 analizador = lex.lex()
-analizador.input('n==4;{}EnCaso Hasta Fin-Desde AF asas DEFAULT Fin-EnCaso/     ')
+analizador.input('Inicio \n EnCaso \n Cuando \n juan < 12 EnTons \n { Maria } \n Cuando   ')
 
 while True:
     tok = analizador.token()

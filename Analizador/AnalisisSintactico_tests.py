@@ -18,7 +18,7 @@ def p_inicio(p):
     p[0]=(p[1],p[2],p[3])
     print(p[0])
 def p_caso(p):
-    ''' casos : EnCaso cuandos SiNo LKEY ID RKEY FinEnCaso SEMMICOLOM
+    ''' casos : EnCaso cuandos SiNo LKEY ID RKEY Fin_EnCaso SEMMICOLOM
     '''
     p[0] =(p[1],p[2],p[3],p[4],p[5],p[6],p[7])
 def p_desigualdades(p):
@@ -52,5 +52,5 @@ parser = yacc.yacc()
     # except EOFError:
     #     break
     #if not s: continue
-result = parser.parse("Inicio \n EnCaso \n Cuando \n juan < 12 EnTons \n { Maria } \n Cuando \n Mario < 12 EnTons \n { Juana }\n SiNo \n {  MAMELA } \n FinEnCaso ; \n Final")
+result = parser.parse("Inicio \n EnCaso \n Cuando \n juan < 12 EnTons \n { Maria } \n Cuando \n Mario < 12 EnTons \n { Juana }\n SiNo \n {  MAMELA } \n Fin_EnCaso ; \n Final")
 print("LOL")
