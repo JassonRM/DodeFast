@@ -1,5 +1,5 @@
 import ply.yacc as yacc
-from
+from Codigo.Analizador.AnalisisLexico import tokens
 # Get the token map from the lexer.  This is required.
 # def p_exp(p):
 #     '''expression : NUMBER'''

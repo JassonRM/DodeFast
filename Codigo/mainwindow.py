@@ -80,7 +80,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.compileBtn.setText(_translate("MainWindow", "Compilar"))
-        self.menuPython_IDE.setTitle(_translate("MainWindow", "Analisis"))
+        self.menuPython_IDE.setTitle(_translate("MainWindow", "Codigo"))
 
     def compileBtnPressed(self):
         toks = plyparser.start(self.plainTextEdit.toPlainText())
