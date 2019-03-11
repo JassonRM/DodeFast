@@ -16,7 +16,7 @@ def p_inicio(p):
     p[0]=(p[1],p[2],p[3])
     print(p[0])
 def p_caso(p):
-    ''' casos : EnCaso cuandos SiNo LKEY ID RKEY Fin_EnCaso SEMMICOLOM
+    ''' casos : EnCaso cuandos SiNo LKEY ID RKEY FinEnCaso SEMMICOLOM
     '''
     p[0] =(p[1],p[2],p[3],p[4],p[5],p[6],p[7])
 def p_desigualdades(p):
@@ -42,6 +42,22 @@ def p_epsilon(p):
     epsilon :
     '''
     p[0] = None
+def p_declaracion(p):
+    '''
+    declaracion : DCL ID SEMMICOLOM declaracion_2
+    | DCL ID DEFAULT NUMBER SEMMICOLOM declaracion_2
+    '''
+    if( len(p)==5):
+        p[0]=(p[1],p[2],p[3],p[4])
+    else:
+        p[0]=(p[1],p[2],p[3],p[4],p[5],p[6])
+
+def p_declaracion_2(p):
+    '''
+    declaracion_2 : declaracion
+    | epsilon
+    '''
+    p[0]=p[1]
 parser = yacc.yacc()
-result = parser.parse("Inicio \n EnCaso \n Cuando \n juan < 12 EnTons \n { Maria } \n Cuando \n Mario < 12 EnTons \n { Juana }\n SiNo \n {  MAMELA } \n Fin_EnCaso ; \n Final")
+result = parser.parse("Inicio \n EnCaso \n Cuando \n juan < 12 EnTons \n { Maria } \n  SiNo \n {  MAMELA } \n FinEnCaso ; \n Final")
 print("LOL")
