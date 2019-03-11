@@ -57,6 +57,7 @@ def p_declaracion_2(p):
     declaracion_2 : declaracion
     | epsilon
     '''
+
     p[0]=p[1]
 parser = yacc.yacc()
 result = parser.parse("Inicio \n EnCaso \n Cuando \n juan < 12 EnTons \n { Maria } \n  SiNo \n {  MAMELA } \n FinEnCaso ; \n Final")
