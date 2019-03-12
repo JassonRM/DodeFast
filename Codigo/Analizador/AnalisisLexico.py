@@ -23,6 +23,11 @@ t_LTE = r'<='
 t_LPARENT = r'\('
 t_RPARENT = r'\)'
 t_SEMMICOLOM = r';'
+def t_Inicio(t):
+    r'Inicio'
+    t.value = "Inicio"
+    t.type = "Inicio"
+    return t
 def t_Ini(t):
     r'Ini'
     t.value = "INI"
