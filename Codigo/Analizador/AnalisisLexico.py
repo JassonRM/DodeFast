@@ -2,7 +2,7 @@ import ply.lex as lex
 reservadas=['DCL', 'EnCaso', 'Cuando','EnTons', 'SiNo', 'FINENCASO', 'Repita', 'HastaEncontrar', 'Desde', 'Hasta',
               'Haga', 'FINDESDE', 'Llamar','Inicio', 'Final', 'Proc','DEFAULT','COMA','DPUNTO','MOVER','INC','INI','ALEATORIO','DEC']
 movimientos=['AF','A','F','DFA','IFA','DFB','IFB','DAA', 'IAA','DAB','IAB','AA']
-tokens = reservadas+['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
+tokens = movimientos+reservadas+['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
           'DIVIDE', 'LPARENT', 'RPARENT','NUMBER','RKEY','LKEY','SEMMICOLOM' ,'ASSIGN']
 t_ignore = '\t '
 t_PLUS = r'\+'
@@ -75,7 +75,7 @@ def t_NUMBER(t):
     t.value=int(t.value)
     return t
 analizador = lex.lex()
-analizador.input("Aleatorio Inc Ini Dec")
+analizador.input("Aleatorio Inc Ini Dec Mover")
 
 while True:
     tok = analizador.token()
