@@ -80,7 +80,7 @@ def t_NUMBER(t):
     t.value=int(t.value)
     return t
 analizador = lex.lex()
-analizador.input("Aleatorio Inc Ini Dec Mover")
+analizador.input("Inicio \n EnCaso \n Cuando \n juan < 12 EnTons \n { } \n  SiNo \n {  DCL D; } \n Fin-EnCaso ; \n Final")
 
 while True:
     tok = analizador.token()
