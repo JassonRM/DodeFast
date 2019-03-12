@@ -1,6 +1,6 @@
 import ply.lex as lex
 reservadas=['DCL', 'EnCaso', 'Cuando','EnTons', 'SiNo', 'FINENCASO', 'Repita', 'HastaEncontrar', 'Desde', 'Hasta',
-              'Haga', 'FINDESDE', 'Llamar','Inicio', 'Final', 'Proc','DEFAULT','COMA','DPUNTO','FUNCION']
+              'Haga', 'FINDESDE', 'Llamar','Inicio', 'Final', 'Proc','DEFAULT','COMA','DPUNTO','MOVER','INC','INI','ALEATORIO','DEC']
 movimientos=['AF','A','F','DFA','IFA','DFB','IFB','DAA', 'IAA','DAB','IAB','AA']
 tokens = reservadas+['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
           'DIVIDE', 'LPARENT', 'RPARENT','NUMBER','RKEY','LKEY','SEMMICOLOM' ,'ASSIGN']
@@ -23,30 +23,30 @@ t_LTE = r'<='
 t_LPARENT = r'\('
 t_RPARENT = r'\)'
 t_SEMMICOLOM = r';'
-def t_Dec(t):
-    r'Dec'
-    t.value = "FUNCION"
-    t.type = "FUNCION"
+def t_Ini(t):
+    r'Ini'
+    t.value = "INI"
+    t.type = "INI"
     return t
 def t_Inc(t):
     r'Inc'
-    t.value = "FUNCION"
-    t.type = "FUNCION"
+    t.value = "INC"
+    t.type = "INC"
     return t
 def t_Mover(t):
     r'Mover'
-    t.value = "FUNCION"
-    t.type = "FUNCION"
+    t.value = "MOVER"
+    t.type = "MOVER"
+    return t
+def t_Dec(t):
+    r'Dec'
+    t.value = "DEC"
+    t.type = "DEC"
     return t
 def t_Aleatorio(t):
     r'Aleatorio'
-    t.value = "FUNCION"
-    t.type = "FUNCION"
-    return t
-def t_Ini(t):
-    r'Ini'
-    t.value = "FUNCION"
-    t.type = "FUNCION"
+    t.value = "ALEATORIO"
+    t.type = "ALEATORIO"
     return t
 def t_FinEnCaso(t):
     r'Fin-EnCaso'
