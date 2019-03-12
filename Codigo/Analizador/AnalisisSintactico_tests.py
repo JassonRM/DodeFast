@@ -125,8 +125,8 @@ def p_mov(p):
 def p_matematicas(p):
     '''
     matematicas : INC LPARENT ID COMA NUMBER RPARENT
-    | Dec LPARENT ID COMA NUMBER RPARENT
-    | Ini LPARENT ID COMA NUMBER RPARENT
+    | DEC LPARENT ID COMA NUMBER RPARENT
+    | INI LPARENT ID COMA NUMBER RPARENT
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 parser = yacc.yacc()
