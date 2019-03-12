@@ -122,6 +122,7 @@ def p_mov(p):
     | AA
     '''
     p[0] = p[1]
+    
 def p_matematicas(p):
     '''
     matematicas : INC LPARENT ID COMA NUMBER RPARENT
