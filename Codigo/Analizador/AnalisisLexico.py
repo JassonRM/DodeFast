@@ -23,6 +23,37 @@ t_LTE = r'<='
 t_LPARENT = r'\('
 t_RPARENT = r'\)'
 t_SEMMICOLOM = r';'
+def t_FinEnCaso(t):
+    r'Fin-EnCaso'
+    t.value = "FINENCASO"
+    t.type = "FINENCASO"
+    return t
+def t_EnCaso(t):
+    r'EnCaso'
+    t.value = "EnCaso"
+    t.type = "EnCaso"
+    return t
+def t_Final(t):
+    r'Final'
+    t.value = "Final"
+    t.type = "Final"
+    return t
+def t_SiNo(t):
+    r'SiNo'
+    t.value = "SiNo"
+    t.type = "SiNo"
+    return t
+def t_EnTons(t):
+    r'EnTons'
+    t.value = "EnTons"
+    t.type = "EnTons"
+    return t
+
+def t_Cuando(t):
+    r'Cuando'
+    t.value = "Cuando"
+    t.type = "Cuando"
+    return t
 def t_Inicio(t):
     r'Inicio'
     t.value = "Inicio"
@@ -54,11 +85,7 @@ def t_Aleatorio(t):
     t.value = "ALEATORIO"
     t.type = "ALEATORIO"
     return t
-def t_FinEnCaso(t):
-    r'Fin-EnCaso'
-    t.value = "FINENCASO"
-    t.type = "FINENCASO"
-    return t
+
 def t_FinDesde(t):
     r'Fin-Desde'
     t.value = "FINDESDE"

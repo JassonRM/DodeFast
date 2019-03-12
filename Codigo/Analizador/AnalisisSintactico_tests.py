@@ -122,7 +122,6 @@ def p_mov(p):
     | AA
     '''
     p[0] = p[1]
-    
 def p_matematicas(p):
     '''
     matematicas : INC LPARENT ID COMA NUMBER RPARENT
@@ -131,5 +130,5 @@ def p_matematicas(p):
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 parser = yacc.yacc()
-result = parser.parse("Inicio \n EnCaso \n Cuando \n juan < 12 EnTons \n { } \n  SiNo \n {  DCL D; } \n Fin-EnCaso ; \n Final")
+result = parser.parse("Inicio DCL B DEFAULT 100; \n EnCaso \n Cuando \n juan < 12 EnTons \n { DCL C DEFAULT 3;DCL C DEFAULT 3;DCL C DEFAULT 3; } \n  SiNo \n {  DCL D; } \n Fin-EnCaso ; \n Final")
 print("LOL")
