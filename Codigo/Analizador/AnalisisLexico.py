@@ -28,6 +28,7 @@ def t_Ini(t):
     t.value = "INI"
     t.type = "INI"
     return t
+
 def t_Inc(t):
     r'Inc'
     t.value = "INC"
