@@ -23,6 +23,39 @@ t_LTE = r'<='
 t_LPARENT = r'\('
 t_RPARENT = r'\)'
 t_SEMMICOLOM = r';'
+def t_Llamar(t):
+    r'Llamar'
+    t.value='Llamar'
+    t.type='Llamar'
+def t_Proc(t):
+    r'Proc'
+    t.value='Proc'
+    t.type='Proc'
+def Repita(t):
+    r'Repita'
+    t.value = "Repita"
+    t.type = "Repita"
+    return t
+def t_Hasta(t):
+    r'Hasta'
+    t.value = "Hasta"
+    t.type = "Hasta"
+    return t
+def t_Desde(t):
+    r'Desde'
+    t.value = "Desde"
+    t.type = "Desde"
+    return t
+def t_Haga(t):
+    r'Haga'
+    t.value = "Haga"
+    t.type = "Haga"
+    return t
+def t_HastaEncontrar(t):
+    r'HastaEncontrar'
+    t.value = "HastaEncontrar"
+    t.type = "HastaEncontrar"
+    return t
 def t_FinEnCaso(t):
     r'Fin-EnCaso'
     t.value = "FINENCASO"
