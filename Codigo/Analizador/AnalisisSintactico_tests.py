@@ -6,7 +6,7 @@ def p_inicio(p):
     p[0]=(p[1],p[2],p[3])
     print(p[0])
 def p_caso(p):
-    ''' casos : EnCaso cuandos SiNo LKEY declaracion RKEY FINENCASO SEMMICOLOM
+    ''' casos : EnCaso cuandos SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM
     '''
     p[0] =(p[1],p[2],p[3],p[4],p[5],p[6],p[7])
 def p_desigualdades(p):
@@ -17,7 +17,7 @@ def p_desigualdades(p):
     | LTE '''
     p[0] = p[1]
 def p_cuandos(p):
-    ''' cuandos : Cuando ID desigualdades NUMBER EnTons LKEY declaracion RKEY cuandos_primo
+    ''' cuandos : Cuando ID desigualdades NUMBER EnTons LKEY sentencias RKEY cuandos_primo
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6], p[7],p[8],p[9])
     print(p)
@@ -130,5 +130,5 @@ def p_matematicas(p):
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL B DEFAULT 100; \n EnCaso \n Cuando \n juan < 12 EnTons \n { DCL C DEFAULT 3;DCL C DEFAULT 3;DCL C DEFAULT 3; } \n  SiNo \n {  DCL D; } \n Fin-EnCaso ; \n Final")
+result = parser.parse("Inicio DCL B DEFAULT 100; \n EnCaso \n Cuando  \n juan < 12 EnTons \n { } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final")
 print("LOL")

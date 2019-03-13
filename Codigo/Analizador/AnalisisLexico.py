@@ -107,7 +107,7 @@ def t_NUMBER(t):
     t.value=int(t.value)
     return t
 analizador = lex.lex()
-analizador.input("Inicio \n EnCaso \n Cuando \n juan < 12 EnTons \n { } \n  SiNo \n {  DCL D; } \n Fin-EnCaso ; \n Final")
+analizador.input("Inicio DCL B DEFAULT 100; \n EnCaso \n Cuando  \n juan < 12 EnTons \n { } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final")
 
 while True:
     tok = analizador.token()
