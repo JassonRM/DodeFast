@@ -21,6 +21,17 @@ def addVar(a,var):
         i=i+1
     if i==len(a):
         a.append(var)
+def addf(a,met):
+    i=0
+    while i<len(a):
+        if a[i].name==var.name:
+            print("REPETIDO")
+            a[i].parametros=met.parametros
+            a[i].cuerpo=met.cuerpo
+            break
+        i=i+1
+    if i==len(a):
+        a.append(met)
 def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final
     '''
@@ -88,7 +99,7 @@ def p_procedimiento(p):
         met.cuerpo=p[9]
     else:
         p[0]=p[1]
-    funciones.append(met)
+    addf(funciones,met)
 def p_repita(p):
     '''
     repeticion_R : Repita sentencias HastaEncontrar ID desigualdades NUMBER sentencias
@@ -162,6 +173,7 @@ def p_matematicas(p):
 parser = yacc.yacc()
 result = parser.parse("Inicio DCL A DEFAULT 12;\n DCL B;  \n DCL A;\n DCL A DEFAULT 23; \nDCL B DEFAULT 5;\n DCL D DEFAULT 21; EnCaso \n Cuando  \n juan < 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final")
 variables.reverse()
+funciones.reverse()
 def listP(a):
     for i in range(len(a)):
         print(a[i].name + a[i].value)
