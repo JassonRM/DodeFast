@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
+import json
 
 class Server:
     def __init__(self):
@@ -13,4 +14,5 @@ class Server:
 
 class Code(Resource):
     def get(self):
-        return "Hola mi codigo es jajaja"
+        list = ["Forward", "Backward", "LOL", "asdf", "asfdasdf", "ahrth", "fdggf", "sgbtd"]
+        return json.dumps(list)
