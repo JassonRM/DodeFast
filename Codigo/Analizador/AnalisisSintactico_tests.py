@@ -11,6 +11,7 @@ class metodos:
         self.name=None
         self.parametros=None
         self.cuerpo=None
+        self.argumentos 
 def addVar(a,var):
     i=0
     while i<len(a):
