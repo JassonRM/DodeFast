@@ -1,10 +1,30 @@
 import ply.yacc as yacc
 from Codigo.Analizador.AnalisisLexico import tokens
+variables=[]
+funciones=[]
+class var:
+    def __init__(self):
+        self.value=None
+        self.name=None
+class metodos:
+    def __init__(self):
+        self.name=None
+        self.parametros=None
+        self.cuerpo=None
+def addVar(a,var):
+    i=0
+    while i<len(a):
+        if a[i].name==var.name:
+            print("REPETIDO")
+            a[i].value=var.value
+            break
+        i=i+1
+    if i==len(a):
+        a.append(var)
 def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final
     '''
     p[0]=(p[1],p[2],p[3])
-    print(p[0])
 def p_caso(p):
     ''' casos : EnCaso cuandos SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM
     '''
@@ -20,7 +40,6 @@ def p_cuandos(p):
     ''' cuandos : Cuando ID desigualdades NUMBER EnTons LKEY sentencias RKEY cuandos_primo
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6], p[7],p[8],p[9])
-    print(p)
 def p_cuandos_primos(p):
     '''
     cuandos_primo : epsilon
@@ -37,10 +56,16 @@ def p_declaracion(p):
     declaracion : DCL ID SEMMICOLOM declaracion_2
     | DCL ID DEFAULT NUMBER SEMMICOLOM declaracion_2
     '''
+    variable=var()
     if( len(p)==5):
         p[0]=(p[1],p[2],p[3],p[4])
+        variable.value=str(0)
+        variable.name=p[2]
     else:
         p[0]=(p[1],p[2],p[3],p[4],p[5],p[6])
+        variable.name=p[2]
+        variable.value=str(p[4])
+    addVar(variables,variable)
 
 def p_declaracion_2(p):
     '''
@@ -49,16 +74,21 @@ def p_declaracion_2(p):
     '''
 
     p[0]=p[1]
-
+#No me sirve jaja, y hay que probarlo para todos los casos donde no hay parametros y asi
 def p_procedimiento(p):
     '''
     procedimiento : Proc ID LPARENT ID RPARENT declaracion Inicio DPUNTO sentencias Final SEMMICOLOM procedimiento
     | epsilon
     '''
+    met=metodos()
     if(len(p)>5):
         p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11],p[12])
+        met.name=p[2]
+        met.parametros=p[4]
+        met.cuerpo=p[9]
     else:
         p[0]=p[1]
+    funciones.append(met)
 def p_repita(p):
     '''
     repeticion_R : Repita sentencias HastaEncontrar ID desigualdades NUMBER sentencias
@@ -130,5 +160,10 @@ def p_matematicas(p):
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL B DEFAULT 100;  \n EnCaso \n Cuando  \n juan < 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final")
-print("LOL")
+result = parser.parse("Inicio DCL A DEFAULT 12;\n DCL B;  \n DCL A;\n DCL A DEFAULT 23; \nDCL B DEFAULT 5;\n DCL D DEFAULT 21; EnCaso \n Cuando  \n juan < 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final")
+variables.reverse()
+def listP(a):
+    for i in range(len(a)):
+        print(a[i].name + a[i].value)
+
+listP(variables)
