@@ -9,7 +9,7 @@ class metodos:
         self.name=None
         self.parametros=None
         self.cuerpo=None
-        self.argumentos
+        self.argumentos=None
 def listP(a):
     for i in range(len(a)):
         print(a[i].name + a[i].value)
@@ -43,6 +43,7 @@ def addf(a,met):
             print("REPETIDO")
             a[i].parametros=met.parametros
             a[i].cuerpo=met.cuerpo
+            a[i].argumentos=met.argumentos
             break
         i=i+1
     if i==len(a):
