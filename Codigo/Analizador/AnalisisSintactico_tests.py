@@ -1,5 +1,4 @@
 import ply.yacc as yacc
-from Codigo.Analizador.AnalisisLexico import tokens
 variables=[]
 funciones=[]
 class var:
