@@ -11,7 +11,7 @@ class metodos:
         self.name=None
         self.parametros=None
         self.cuerpo=None
-        self.argumentos 
+        self.argumentos
 def addVar(a,var):
     i=0
     while i<len(a):
@@ -172,7 +172,7 @@ def p_matematicas(p):
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL A DEFAULT 12;\n DCL B;  \n DCL A;\n DCL A DEFAULT 23; \nDCL B DEFAULT 5;\n DCL D DEFAULT 21; EnCaso \n Cuando  \n juan < 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final")
+result = parser.parse("Inicio  Proc Hola(x) Inicio : DCL x Final; \n Final")
 variables.reverse()
 funciones.reverse()
 def listP(a):
