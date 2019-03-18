@@ -1,5 +1,6 @@
 import ply.yacc as yacc
-from Codigo.Analizador.AnalisisLexico import tokens
+#from Codigo.Analizador.AnalisisLexico import tokens
+from Analizador.AnalisisLexico import tokens
 def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final procedimiento
     '''
@@ -61,10 +62,16 @@ def p_declaracion_2(p):
     '''
 
     p[0]=p[1]
+def p_idopcional(p):
+    '''
+    ID_opcional : ID
+    | epsilon
+    '''
+    p[0]=p[1]
 #No me sirve jaja, y hay que probarlo para todos los casos donde no hay parametros y asi
 def p_procedimiento(p):
     '''
-    procedimiento : Proc ID LPARENT ID RPARENT declaracion Inicio DPUNTO sentencias Final SEMMICOLOM procedimiento
+    procedimiento : Proc ID LPARENT ID_opcional RPARENT  declaracion_2 Inicio DPUNTO sentencias Final SEMMICOLOM procedimiento
     | epsilon
     '''
     if(len(p)>5):
@@ -142,5 +149,5 @@ def p_matematicas(p):
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 100;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final \n Proc Hola(a) Inicio: DCLx Final;")
+result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 100;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final \n Proc Hola(a) DCL x DEFAULT 100 ; Inicio:   Final;")
 print(result)
