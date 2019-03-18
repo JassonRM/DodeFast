@@ -1,5 +1,5 @@
 import ply.yacc as yacc
-from Analizador.AnalisisLexico import tokens
+from Codigo.Analizador.AnalisisLexico import tokens
 def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final procedimiento
     '''
@@ -142,5 +142,5 @@ def p_matematicas(p):
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 100;  \n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final")
+result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 100;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final \n Proc Hola(a) Inicio: DCLx Final;")
 print(result)

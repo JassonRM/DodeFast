@@ -56,5 +56,11 @@ def buscarVar(x):
             return y
     if y==None:
         print( "ERROR, Variable no encontrada")
-variables.reverse()
-funciones.reverse()
+def buscarMetodos(x):
+    y = None
+    for i in range(len(funciones)):
+        if funciones[i].name == x:
+            y = funciones[i]
+            return y
+    if y == None:
+        print("ERROR, Metodo no encontrada")
