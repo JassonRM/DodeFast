@@ -99,7 +99,6 @@ def t_Ini(t):
     t.value = "INI"
     t.type = "INI"
     return t
-
 def t_Inc(t):
     r'Inc'
     t.value = "INC"
@@ -142,7 +141,7 @@ def t_NUMBER(t):
     t.value=int(t.value)
     return t
 analizador = lex.lex()
-analizador.input("Inicio DCL B DEFAULT 100; \n EnCaso \n Cuando  \n juan < 12 EnTons \n { } Proc \n  SiNo \n {  } \n Fin-EnCaso ; \n Final")
+analizador.input("Inicio DCL B DEFAULT 100; \n EnCaso \n Cuando  \n juan < 12 EnTons \n { } Proc \n  SiNo \n {  } \n Fin-EnCaso ; \n Final Proc Holaa(a)")
 
 while True:
     tok = analizador.token()

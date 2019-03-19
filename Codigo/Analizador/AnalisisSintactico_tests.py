@@ -1,6 +1,6 @@
 import ply.yacc as yacc
-#from Codigo.Analizador.AnalisisLexico import tokens
 from Analizador.AnalisisLexico import tokens
+from Analizador.AnalisisSemantico import *
 def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final procedimiento
     '''
@@ -50,11 +50,16 @@ def p_declaracion(p):
     declaracion : DCL ID SEMMICOLOM declaracion_2
     | DCL ID DEFAULT NUMBER SEMMICOLOM declaracion_2
     '''
+    vari=var()
     if( len(p)==5):
         p[0]=(p[1],p[2],p[3],p[4])
+        vari.name=p[2]
+        vari.value=0
     else:
         p[0]=(p[1],p[2],p[3],p[4],p[5],p[6])
-
+        vari.name=p[2]
+        vari.value=p[4]
+    addVar(variables,vari)
 def p_declaracion_2(p):
     '''
     declaracion_2 : declaracion
@@ -64,20 +69,29 @@ def p_declaracion_2(p):
     p[0]=p[1]
 def p_idopcional(p):
     '''
-    ID_opcional : ID
+    idopcional : ID
     | epsilon
     '''
     p[0]=p[1]
 #No me sirve jaja, y hay que probarlo para todos los casos donde no hay parametros y asi
+#AUN FATLTA
 def p_procedimiento(p):
     '''
-    procedimiento : Proc ID LPARENT ID_opcional RPARENT  declaracion_2 Inicio DPUNTO sentencias Final SEMMICOLOM procedimiento
+    procedimiento : Proc ID LPARENT idopcional RPARENT  declaracion_2 Inicio DPUNTO sentencias Final SEMMICOLOM
     | epsilon
     '''
+    proc=metodos()
     if(len(p)>5):
-        p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11],p[12])
+        p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11])
+        proc.name=p[2]
+        proc.parametros=p[4]
+        proc.cuerpo=p[10]
+        print("333")
     else:
         p[0]=p[1]
+        proc.name=p[1]
+    print("2222")
+    addf(funciones,proc)
 def p_repita(p):
     '''
     repeticion_R : Repita sentencias HastaEncontrar ID desigualdades NUMBER sentencias
@@ -149,5 +163,7 @@ def p_matematicas(p):
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 100;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final \n Proc Hola(a) DCL x DEFAULT 100 ; Inicio:   Final;")
+result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 10;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final \n Proc Hola (a) DCL x DEFAULT 100 ; Inicio:  Final;")
 print(result)
+listMet(funciones)
+listvar(variables)

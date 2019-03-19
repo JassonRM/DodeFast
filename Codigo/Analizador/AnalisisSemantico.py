@@ -9,11 +9,20 @@ class metodos:
         self.name=None
         self.parametros=None
         self.cuerpo=None
-        self.argumentos=None
-def listP(a):
+def listvar(a):
     for i in range(len(a)):
-        print(a[i].name + a[i].value)
-
+        print(a[i].name + str(a[i].value))
+def listMet(a):
+    for i in range(len(a)):
+        print(a[i].parametros )
+def contParametros(a):
+    i=0
+    if len(a)>0:
+        i=i+1
+    for x in range(len(a)):
+        if a[x]==",":
+            i=i+1
+    return i
 def pDesiguales(var, simbolo,comp):
     x=int(buscarVar(var).value)
     if simbolo==">":
@@ -39,11 +48,10 @@ def addVar(a,var):
 def addf(a,met):
     i=0
     while i<len(a):
-        if a[i].name==var.name:
+        if a[i].name==met.name:
             print("REPETIDO")
             a[i].parametros=met.parametros
             a[i].cuerpo=met.cuerpo
-            a[i].argumentos=met.argumentos
             break
         i=i+1
     if i==len(a):
@@ -64,3 +72,4 @@ def buscarMetodos(x):
             return y
     if y == None:
         print("ERROR, Metodo no encontrada")
+print(str(contParametros("qasa,xasa,e")))
