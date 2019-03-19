@@ -77,12 +77,12 @@ def p_idopcional(p):
 #AUN FATLTA
 def p_procedimiento(p):
     '''
-    procedimiento : Proc ID LPARENT idopcional RPARENT  declaracion_2 Inicio DPUNTO sentencias Final SEMMICOLOM
+    procedimiento : Proc ID LPARENT idopcional RPARENT  declaracion_2 Inicio DPUNTO sentencias Final SEMMICOLOM procedimiento
     | epsilon
     '''
     proc=metodos()
     if(len(p)>5):
-        p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11])
+        p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11],p[12])
         proc.name=p[2]
         proc.parametros=p[4]
         proc.cuerpo=p[10]
@@ -163,7 +163,7 @@ def p_matematicas(p):
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 10;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final \n Proc Hola (a) DCL x DEFAULT 100 ; Inicio:  Final;")
+result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 10;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final \n Proc Hola (a) DCL x DEFAULT 100 ; Inicio:  Final; Proc jesus () DCL x DEFAULT 100 ; Inicio:  Final; ")
 print(result)
 listMet(funciones)
 listvar(variables)

@@ -14,7 +14,7 @@ def listvar(a):
         print(a[i].name + str(a[i].value))
 def listMet(a):
     for i in range(len(a)):
-        print(a[i].parametros )
+        print(a[i].name )
 def contParametros(a):
     i=0
     if len(a)>0:
