@@ -4,7 +4,7 @@ from Analizador.AnalisisSemantico import *
 def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final procedimiento
     '''
-    p[0]=(p[1],p[2],p[3])
+    p[0]=(p[1],p[2],p[3],p[4],p[5])
 def p_caso(p):
     ''' casos : EnCaso cuandos SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM
     | EnCaso ID cuandos_5 SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM
