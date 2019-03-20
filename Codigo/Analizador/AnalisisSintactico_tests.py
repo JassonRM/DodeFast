@@ -6,13 +6,13 @@ def p_inicio(p):
     '''
     p[0]=(p[1],p[2],p[3],p[4],p[5])
 def p_caso(p):
-    ''' casos : EnCaso cuandos SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM
-    | EnCaso ID cuandos_5 SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM
+    ''' casos : EnCaso cuandos SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM sentencias
+    | EnCaso ID cuandos_5 SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM sentencias
     '''
-    if len(p)==9:
-        p[0] =(p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8])
+    if len(p)==10:
+        p[0] =(p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9])
     else:
-        p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9])
+        p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10])
 def p_desigualdades(p):
     ''' desigualdades : EQUAL
     | GT
@@ -117,6 +117,7 @@ def p_funciones(p):
 def p_argumento(p):
     '''
     argumento : ID COMA argumento
+    | NUMBER COMA argumento
     | epsilon
     | ID
     '''
@@ -163,7 +164,7 @@ def p_matematicas(p):
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 10;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final \n Proc Hola (a) DCL x DEFAULT 100 ; Inicio:  Final; Proc jesus () DCL x DEFAULT 100 ; Inicio:  Final; ")
+result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 10;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n Cuando  \n juan > 12 EnTons \n {  } \n SiNo \n {  } \n Fin-EnCaso ;\n  \n  Final \n Proc Hola (a) DCL x DEFAULT 100 ; Inicio:  Final; Proc jesus () DCL x DEFAULT 100 ; Inicio:  Final; ")
 print(result)
 listMet(funciones)
 listvar(variables)
