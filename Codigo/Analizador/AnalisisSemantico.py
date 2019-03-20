@@ -205,7 +205,9 @@ def parse_desde(tupla):
     while (pDesiguales(tupla[6], tupla[7], tupla[8])):
         ejecutar(tupla[9])
         incrementar(variable.name,1)
-
+    delete_var(variable)
+def delete_var(variable):
+    variables.remove(variable)
 
 parseProc(procedimientos,None)
 ejecutar(result)
