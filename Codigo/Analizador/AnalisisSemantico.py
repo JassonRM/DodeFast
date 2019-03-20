@@ -11,8 +11,8 @@ class metodos:
     def __init__(self):
         self.name=None
         self.parametros=None
-        self.variables=[]
         self.cuerpo=None
+        self.variables=[]
 def parseProc(tupla):
     print(tupla)
     if isinstance(tupla, int):
@@ -100,6 +100,7 @@ def buscarMetodos(x):
     if y == None:
         print("ERROR, Metodo no encontrada")
 def incrementar(var,num):
+    print(var)
     x=buscarVar(var)
     x.value+=num
 def decrementar(var,num):
@@ -108,44 +109,25 @@ def decrementar(var,num):
 def iniciar(var,num):
     x=buscarVar(var)
     x.value=num
-def parseLlama(proc,arg):
-    args=[]
-    lista = proc.parametros
-    name = ""
-    if contParametros(proc.parametros )== 1:
-        for i in range(len(lista)):
-            name += lista[i]
-        x = var()
-        x.name = name
-        proc.variables.append(x)
-        variables.append(x)
-    elif contParametros(proc.parametros )> 0:
-        for i in range(len(lista)):
-            if lista[i] != ",":
-                name += lista[i]
-            else:
-                x = var()
-                x.name = name
-                proc.variables.append(x)
-                variables.append(x)
-                name = ""
-    name=""
-    if contParametros(proc.parametros ) == 1:
-        for i in range(len(arg)):
-            name += arg[i]
-        args.append(buscarVar(name))
-    elif contParametros(proc.parametros ) > 0:
-        for i in range(len(arg)):
-            if arg[i] != ",":
-                name += arg[i]
-            else:
-                args.append(buscarVar(name))
-                name = ""
-    for i in range(len(args)):
-        proc.variables[i].value=args[i].value
+def parseLlama(proc,args):
+    for i in range(len(proc.parametros)):
+        if proc.parametros[i]!=",":
+            vari=var()
+            vari.name=proc.parametros[i]
+            proc.variables.append(vari)
+            variables.append(vari)
+    para=[]
+    if isinstance(args, str):
+        para.append(buscarVar(args))
+    else:
+        for i in range(len(args)):
+            if args[i]!=",":
+                para.append(buscarVar(args[i]))
+    for i in range(len(para)):
+        proc.variables[i].value=para[i].value
     ejecutar(proc.cuerpo)
-    for i in range(len(args)):
-        args[i].value=proc.variables[i].value
+    for i in range(len(para)):
+        para[i].value=proc.variables[i].value
     for i in range(len(proc.variables)):
         delete_var(proc.variables[i])
 def ejecutar(tupla):

@@ -71,7 +71,7 @@ def p_idopcional(p):
 #AUN FATLTA
 def p_procedimiento(p):
     '''
-    procedimiento : Proc ID LPARENT idopcional RPARENT  declaracion_2 Inicio DPUNTO sentencias Final SEMMICOLOM procedimiento
+    procedimiento : Proc ID LPARENT argumento RPARENT  declaracion_2 Inicio DPUNTO sentencias Final SEMMICOLOM procedimiento
     | epsilon
     '''
     if(len(p)>5):
@@ -158,6 +158,6 @@ def purba(lolol):
 purba(23)
 
 parser = yacc.yacc()
-parseo= parser.parse("Inicio DCL juan DEFAULT 100; Llamar Hola(juan) ; Llamar hello(juan) ; Final Proc Hola(a) Inicio: Inc(a,2) Final; Proc hello(a) DCL meme DEFAULT 10; Inicio: Ini(a,4) Final;")
+parseo= parser.parse("Inicio DCL juan DEFAULT 100; DCL marco DEFAULT 100; Llamar Hola (juan,marco)  ; Llamar hello(marco)  ; Final Proc Hola(a,b) Inicio: Inc(b,2) Inc(a,5) Final; Proc hello(a) DCL meme DEFAULT 10; Inicio: Ini(a,4) Final;")
 result=parseo[0:4]
 procedimientos=parseo[4]
