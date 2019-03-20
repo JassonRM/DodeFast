@@ -110,7 +110,7 @@ def p_argumento(p):
         p[0]=(p[1],p[2],p[3])
     else:
         p[0] = p[1]
-def p_llamada(p):
+def p_llamadas(p):
     '''
     llamadas : Llamar  ID LPARENT argumento  RPARENT SEMMICOLOM sentencias
     '''
@@ -158,6 +158,6 @@ def purba(lolol):
 purba(23)
 
 parser = yacc.yacc()
-parseo= parser.parse("Inicio DCL juan DEFAULT 100; Inc(juan,2) Final Proc Hola(a) Inicio: Final; Proc hello(a) DCL meme DEFAULT 10; Inicio: Inc(meme,4) Final;")
+parseo= parser.parse("Inicio DCL juan DEFAULT 100; Llamar Hola(juan) ; Llamar hello(juan) ; Final Proc Hola(a) Inicio: Inc(a,2) Final; Proc hello(a) DCL meme DEFAULT 10; Inicio: Ini(a,4) Final;")
 result=parseo[0:4]
 procedimientos=parseo[4]
