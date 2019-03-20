@@ -50,16 +50,10 @@ def p_declaracion(p):
     declaracion : DCL ID SEMMICOLOM declaracion_2
     | DCL ID DEFAULT NUMBER SEMMICOLOM declaracion_2
     '''
-    vari=var()
     if( len(p)==5):
         p[0]=(p[1],p[2],p[3],p[4])
-        vari.name=p[2]
-        vari.value=0
     else:
         p[0]=(p[1],p[2],p[3],p[4],p[5],p[6])
-        vari.name=p[2]
-        vari.value=p[4]
-    addVar(variables,vari)
 def p_declaracion_2(p):
     '''
     declaracion_2 : declaracion
@@ -73,25 +67,15 @@ def p_idopcional(p):
     | epsilon
     '''
     p[0]=p[1]
-#No me sirve jaja, y hay que probarlo para todos los casos donde no hay parametros y asi
-#AUN FATLTA
 def p_procedimiento(p):
     '''
     procedimiento : Proc ID LPARENT idopcional RPARENT  declaracion_2 Inicio DPUNTO sentencias Final SEMMICOLOM procedimiento
     | epsilon
     '''
-    proc=metodos()
     if(len(p)>5):
         p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11],p[12])
-        proc.name=p[2]
-        proc.parametros=p[4]
-        proc.cuerpo=p[10]
-        print("333")
     else:
         p[0]=p[1]
-        proc.name=p[1]
-    print("2222")
-    addf(funciones,proc)
 def p_repita(p):
     '''
     repeticion_R : Repita sentencias HastaEncontrar ID desigualdades NUMBER sentencias
@@ -167,6 +151,3 @@ def p_error(p):
     print("ERROR DE SINTAXIS:\n" +str(p)+"\nLINEA NUMERO: "+str(p.lineno -8))
 parser = yacc.yacc()
 result = parser.parse("Inicio DCL juan DEFAULT 100;\n EnCaso \n Cuando  \n juan > 1 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final \n Proc Hola (a) DCL x DEFAULT 100 ; Inicio:  Final; Proc jesus () DCL y DEFAULT 100 ; Inicio:  Final; ")
-print(result)
-listMet(funciones)
-listvar(variables)
