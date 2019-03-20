@@ -163,6 +163,10 @@ def ejecutar(tupla):
                 variable.name = tupla[1]
                 variable.value = tupla[3]
                 addvar(variable,variables)
+        elif tupla[i] == 'Repita':
+            parse_repita(tupla)
+        elif tupla[i] == 'Desde':
+            parse_desde(tupla)
         elif tupla[i]=="EnCaso":
            print("ejecutar ENcaso"),
         elif tupla[i] == 'Mover':
