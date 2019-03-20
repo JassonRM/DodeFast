@@ -1,5 +1,5 @@
-from Analizador.AnalisisSintactico_tests import result,procedimientos
 from Analizador.direction_creator import *
+from Analizador.AnalisisSintactico_tests import result,procedimientos
 variables=[]
 funciones=[]
 instrucciones = Instructor()

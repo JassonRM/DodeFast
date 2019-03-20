@@ -85,7 +85,7 @@ def p_repita(p):
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6], p[7])
 def  p_repita_2(p):
     '''
-    repita_2 : Desde ID DPUNTO EQUAL NUMBER Hasta ID desigualdadesn NUMBER sentencias FINDESDE sentencias
+    repita_2 : Desde ID DPUNTO EQUAL NUMBER Hasta ID desigualdades NUMBER sentencias FINDESDE sentencias
     '''
     p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11],p[12])
 def p_funciones(p):
