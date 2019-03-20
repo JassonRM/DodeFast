@@ -24,6 +24,16 @@ def contParametros(a):
         if a[x]==",":
             i=i+1
     return i
+def addvar(a):
+    i=True
+    for x in range(len(variables)):
+        if variables[x].name==a.name:
+            i=False
+            print("VARIABLE YA EXISTENTE")
+            break
+    if i:
+        print("VARIABLE AGREGADA")
+        variables.append(a)
 def pDesiguales(var, simbolo,comp):
     x=int(buscarVar(var).value)
     if simbolo==">":
@@ -52,7 +62,15 @@ def buscarMetodos(x):
             return y
     if y == None:
         print("ERROR, Metodo no encontrada")
-
+def incrementar(var,num):
+    x=buscarVar(var)
+    x.value+=num
+def decrementar(var,num):
+    x=buscarVar(var)
+    x.value-=num
+def iniciar(var,num):
+    x=buscarVar(var)
+    x.value=num
 def ejecutar(tupla):
     print(tupla)
     if isinstance(tupla, int):
@@ -60,28 +78,34 @@ def ejecutar(tupla):
     elif tupla == None:
         return None
     for i in range(len(tupla)-1):
-        if tupla[0]=="Inicio":
-            ejecutar(tupla[i+1])
-        elif tupla[0]=="DCL":
+        if isinstance(tupla[i], tuple):
+            ejecutar(tupla[i])
+        elif tupla[i]=="Inicio":
+            print("INICIO DE CODIGO")
+        elif tupla[i]=="DCL":
             if len(tupla)==4:
                 variable=var()
                 variable.name=tupla[1]
                 variable.value=0
-                variables.append(variable)
+                addvar(variable)
             elif len(tupla)==6:
                 variable = var()
                 variable.name = tupla[1]
                 variable.value = tupla[3]
-                variables.append(variable)
-            ejecutar(tupla[i+1])
-        elif tupla[0]=="EnCaso":
-            ejecutar(tupla[i+1])
-        elif tupla[0]=="Cuando":
+                addvar(variable)
+        elif tupla[i]=="EnCaso":
+           print("ejecutar ENcaso")
+        elif tupla[i]=="Cuando":
             condicion=pDesiguales(tupla[1],tupla[2],tupla[3])
             if condicion:
-                print("CIERTO")
-                ejecutar(tupla[6])
-                break
-            ejecutar(tupla[i+1])
-
+                ejecutar("Cuando")
+        elif tupla[i]=="INC":
+            incrementar(tupla[2],int(tupla[4]))
+        elif tupla[i]=="INI":
+            iniciar(tupla[2],int(tupla[4]))
+        elif tupla[i]=="DEC":
+            decrementar(tupla[2],int(tupla[4]))
+        elif tupla[i]=="Final":
+            print("FIN DE CODIGO")
 ejecutar(result)
+listvar(variables)

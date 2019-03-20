@@ -95,7 +95,7 @@ def p_funciones(p):
     | ALEATORIO LPARENT RPARENT sentencias
     '''
     if(len(p)==3):
-        p[0] = (p[1], p[2])
+        p[0] = (p[1],p[2])
     elif( len(p)==4):
         p[0] = (p[1], p[2], p[3])
     else:
@@ -115,7 +115,7 @@ def p_llamada(p):
     llamadas : Llamar  ID LPARENT argumento  RPARENT SEMMICOLOM sentencias
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6], p[7])
-def p_sentencia(p):
+def p_sentencias(p):
     '''
     sentencias : casos
     | llamadas
@@ -151,5 +151,6 @@ def p_matematicas(p):
 def p_error(p):
     print("ERROR DE SINTAXIS: \n"+str(p)+"\nLINEA :"+str(p.lineno-8))
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL juan DEFAULT 100;  EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final")
-print(result)
+parseo= parser.parse("Inicio DCL juan DEFAULT 100; Inc(juan,2) Final Proc Hola(a) Inicio: Final;")
+result=parseo[0:4]
+procedimientos=parseo[4]
