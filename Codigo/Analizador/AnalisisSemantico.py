@@ -73,3 +73,7 @@ def buscarMetodos(x):
             return y
     if y == None:
         print("ERROR, Metodo no encontrada")
+def ejecutar(tupla):
+    for i in range(len(tupla)):
+        if tupla[i]=="Inicio":
+            ejecutar(tupla[i])
