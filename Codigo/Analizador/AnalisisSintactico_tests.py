@@ -1,6 +1,6 @@
 import ply.yacc as yacc
 from Analizador.AnalisisLexico import tokens
-from Analizador.AnalisisSemantico import *
+#from Analizador.AnalisisSemantico import *
 def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final procedimiento
     '''
@@ -9,10 +9,10 @@ def p_caso(p):
     ''' casos : EnCaso cuandos SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM sentencias
     | EnCaso ID cuandos_5 SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM sentencias
     '''
-    if len(p)==10:
-        p[0] =(p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9])
+    if len(p)==9:
+        p[0] =(p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8])
     else:
-        p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10])
+        p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9])
 def p_desigualdades(p):
     ''' desigualdades : EQUAL
     | GT
@@ -50,10 +50,16 @@ def p_declaracion(p):
     declaracion : DCL ID SEMMICOLOM declaracion_2
     | DCL ID DEFAULT NUMBER SEMMICOLOM declaracion_2
     '''
+#    vari=var()
     if( len(p)==5):
         p[0]=(p[1],p[2],p[3],p[4])
+      #  vari.name=p[2]
+       # vari.value=0
     else:
         p[0]=(p[1],p[2],p[3],p[4],p[5],p[6])
+       # vari.name=p[2]
+       # vari.value=p[4]
+   # addVar(variables,vari)
 def p_declaracion_2(p):
     '''
     declaracion_2 : declaracion
@@ -67,15 +73,25 @@ def p_idopcional(p):
     | epsilon
     '''
     p[0]=p[1]
+#No me sirve jaja, y hay que probarlo para todos los casos donde no hay parametros y asi
+#AUN FATLTA
 def p_procedimiento(p):
     '''
     procedimiento : Proc ID LPARENT idopcional RPARENT  declaracion_2 Inicio DPUNTO sentencias Final SEMMICOLOM procedimiento
     | epsilon
     '''
+#    proc=metodos()
     if(len(p)>5):
         p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11],p[12])
+      #  proc.name=p[2]
+      #  proc.parametros=p[4]
+      #  proc.cuerpo=p[10]
+        print("333")
     else:
         p[0]=p[1]
+       # proc.name=p[1]
+    print("2222")
+  #  addf(funciones,proc)
 def p_repita(p):
     '''
     repeticion_R : Repita sentencias HastaEncontrar ID desigualdades NUMBER sentencias
@@ -101,7 +117,6 @@ def p_funciones(p):
 def p_argumento(p):
     '''
     argumento : ID COMA argumento
-    | NUMBER COMA argumento
     | epsilon
     | ID
     '''
@@ -147,7 +162,8 @@ def p_matematicas(p):
     | INI LPARENT ID COMA NUMBER RPARENT
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
-def p_error(p):
-    print("ERROR DE SINTAXIS:\n" +str(p)+"\nLINEA NUMERO: "+str(p.lineno -8))
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL juan DEFAULT 100;\n EnCaso \n Cuando  \n juan > 1 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final \n Proc Hola (a) DCL x DEFAULT 100 ; Inicio:  Final; Proc jesus () DCL y DEFAULT 100 ; Inicio:  Final; ")
+result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 10;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final \n Proc Hola (a) DCL x DEFAULT 100 ; Inicio:  Final; Proc jesus () DCL x DEFAULT 100 ; Inicio:  Final; ")
+print(result)
+#listMet(funciones)
+#listvar(variables)
