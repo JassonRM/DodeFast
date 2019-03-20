@@ -1,23 +1,81 @@
-from Analizador.AnalisisSintactico_tests import result
+from Analizador.AnalisisSintactico_tests import result,procedimientos
 from Analizador.direction_creator import *
 variables=[]
 funciones=[]
 instrucciones = Instructor()
 class var:
     def __init__(self):
-        self.value=None
+        self.value=0
         self.name=None
 class metodos:
     def __init__(self):
         self.name=None
-        self.parametros=None
+        self.num=0
+        self.variables=[]
         self.cuerpo=None
+def parseProc(tupla,fun):
+    print(tupla)
+    if isinstance(tupla, int):
+        return None
+    elif tupla == None:
+        return None
+    for i in range(len(tupla)):
+        if isinstance(tupla[i], tuple):
+            parseProc(tupla[i],None)
+        elif tupla[i]=="Proc":
+            print("INICIO DE PROCEDIMIENTO")
+            procedi=metodos()
+            procedi.name=tupla[i+1]
+            procedi.num=contParametros(tupla[i+3])
+            lista = tupla[i + 3]
+            name =""
+            if procedi.num==1:
+                for i in range(len(lista)):
+                    name += lista[i]
+                x = var()
+                x.name = name
+                procedi.variables.append(x)
+            elif procedi.num>0:
+                for i in range(len(lista)):
+                    if lista[i]!=",":
+                        name+=lista[i]
+                    else:
+                        x=var()
+                        x.name=name
+                        procedi.variables.append(x)
+                        name =""
+            procedi.cuerpo = tupla[i+8]
+            if tupla[i+5]!=None:
+                aux=tupla[i+5]
+                parseProc(aux,procedi)
+            addfunc(procedi)
+        elif tupla[i]=="DCL":
+            if fun==None:
+                return
+            elif len(tupla)==4:
+                variable=var()
+                variable.name=tupla[1]
+                variable.value=0
+                addvar(variable,fun.variables)
+            elif len(tupla)==6:
+                variable = var()
+                variable.name = tupla[1]
+                variable.value = tupla[3]
+                addvar(variable,fun.variables)
+        elif tupla[i]=="Final":
+            print("FINAL PROCEDIMIENTO")
 def listvar(a):
     for i in range(len(a)):
-        print(a[i].name + str(a[i].value))
+        print("#################################")
+        print("Variable: "+a[i].name )
+        print("Valor: "+str(a[i].value))
 def listMet(a):
     for i in range(len(a)):
-        print(a[i].name )
+        print("#################################")
+        print("Procedimiento: "+a[i].name)
+        print("Numero de parametros: "+str(a[i].num))
+        print("Parametros: "+(str(a[i].variables)))
+        print("Codigo: "+str(a[i].cuerpo))
 def contParametros(a):
     i=0
     if len(a)>0:
@@ -26,16 +84,26 @@ def contParametros(a):
         if a[x]==",":
             i=i+1
     return i
-def addvar(a):
+def addfunc(proc):
+    i = True
+    for x in range(len(funciones)):
+        if funciones[x].name == proc.name:
+            i = False
+            print("PROCEDIMIENTO YA EXISTENTE")
+            break
+    if i:
+        print("PROCEDIMIENTO AGREGADA")
+        funciones.append(proc)
+def addvar(a,list):
     i=True
-    for x in range(len(variables)):
-        if variables[x].name==a.name:
+    for x in range(len(list)):
+        if list[x].name==a.name:
             i=False
             print("VARIABLE YA EXISTENTE")
             break
     if i:
         print("VARIABLE AGREGADA")
-        variables.append(a)
+        list.append(a)
 def pDesiguales(var, simbolo,comp):
     x=int(buscarVar(var).value)
     if simbolo==">":
@@ -79,7 +147,7 @@ def ejecutar(tupla):
         return None
     elif tupla == None:
         return None
-    for i in range(len(tupla)-1):
+    for i in range(len(tupla)):
         if isinstance(tupla[i], tuple):
             ejecutar(tupla[i])
         elif tupla[i]=="Inicio":
@@ -89,14 +157,14 @@ def ejecutar(tupla):
                 variable=var()
                 variable.name=tupla[1]
                 variable.value=0
-                addvar(variable)
+                addvar(variable,variables)
             elif len(tupla)==6:
                 variable = var()
                 variable.name = tupla[1]
                 variable.value = tupla[3]
-                addvar(variable)
+                addvar(variable,variables)
         elif tupla[i]=="EnCaso":
-           print("ejecutar ENcaso")
+           print("ejecutar ENcaso"),
         elif tupla[i] == 'Mover':
             instrucciones.parsear_intruccion(tupla)
         elif tupla[i]=="Cuando":
@@ -139,5 +207,10 @@ def parse_desde(tupla):
         incrementar(variable.name,1)
 
 
+parseProc(procedimientos,None)
 ejecutar(result)
+print(procedimientos)
+print("LISTA DE VARIABLES")
 listvar(variables)
+print("LISTA DE PROCEDIMIENTOS")
+listMet(funciones)
