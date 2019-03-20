@@ -129,5 +129,14 @@ def parse_repita(tupla):
         ejecutar(tupla[1])
         if(recursiones==3000):
             print("Posible Ciclo")
+def parse_desde(tupla):
+    variable = var()
+    variable.name = tupla[1]
+    variable.value = tupla[4]
+    addvar(variable)
+    while (pDesiguales(tupla[6], tupla[7], tupla[8])):
+        ejecutar(tupla[9])
+
+
 ejecutar(result)
 listvar(variables)
