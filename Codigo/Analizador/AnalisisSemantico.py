@@ -136,6 +136,7 @@ def parse_desde(tupla):
     addvar(variable)
     while (pDesiguales(tupla[6], tupla[7], tupla[8])):
         ejecutar(tupla[9])
+        incrementar(variable.name,1)
 
 
 ejecutar(result)
