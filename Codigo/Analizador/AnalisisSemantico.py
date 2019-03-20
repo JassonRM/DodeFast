@@ -1,6 +1,8 @@
 from Analizador.AnalisisSintactico_tests import result
+from Analizador.direction_creator import *
 variables=[]
 funciones=[]
+instrucciones = Instructor()
 class var:
     def __init__(self):
         self.value=None
@@ -95,6 +97,8 @@ def ejecutar(tupla):
                 addvar(variable)
         elif tupla[i]=="EnCaso":
            print("ejecutar ENcaso")
+        elif tupla[i] == 'Mover':
+            instrucciones.parsear_intruccion(tupla)
         elif tupla[i]=="Cuando":
             condicion=pDesiguales(tupla[1],tupla[2],tupla[3])
             if condicion:
