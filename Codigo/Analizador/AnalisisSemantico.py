@@ -111,5 +111,23 @@ def ejecutar(tupla):
             decrementar(tupla[2],int(tupla[4]))
         elif tupla[i]=="Final":
             print("FIN DE CODIGO")
+def check_cycle(tupla):
+    var=False
+    for i in range (len(tupla)):
+        if(isinstance(tuple,tupla[i])):
+            return check_cycle(tuple)
+        elif (tupla[0]=='Inc' or tupla[0]=='Dec' or tupla[0]=='Ini'):
+            return True
+    return var
+
+def parse_repita(tupla):
+    if(check_cycle(tupla)):
+        print("No tiene aumentos,disminuciones ni cambios a la variable, puede ser infinita")
+    recursiones = 0
+    while( pDesiguales(tupla[3], tupla[4], tupla[5])):
+        recursiones+=1
+        ejecutar(tupla[1])
+        if(recursiones==3000):
+            print("Posible Ciclo")
 ejecutar(result)
 listvar(variables)

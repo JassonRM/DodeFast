@@ -150,13 +150,7 @@ def p_matematicas(p):
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 def p_error(p):
     print("ERROR DE SINTAXIS: \n"+str(p)+"\nLINEA :"+str(p.lineno-8))
-def purba(lolol):
-    if lolol == 34:
-        purba(1)
-        print(w)
-    else:
-        print("LOL")
-purba(23)
+
 parser = yacc.yacc()
 parseo= parser.parse("Inicio DCL juan DEFAULT 100; Inc(juan,2) Final Proc Hola(a) Inicio: Final;")
 result=parseo[0:4]
