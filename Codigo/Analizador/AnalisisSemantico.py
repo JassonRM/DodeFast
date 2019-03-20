@@ -1,3 +1,4 @@
+from Analizador.AnalisisSintactico_tests import result
 variables=[]
 funciones=[]
 class var:
@@ -33,7 +34,7 @@ def pDesiguales(var, simbolo,comp):
         return x<comp
     elif simbolo=="<=":
         return x<=comp
-    elif simbolo=="==":
+    elif simbolo=="=":
         return x==comp
 def addVar(a,var):
     i=0
@@ -72,4 +73,3 @@ def buscarMetodos(x):
             return y
     if y == None:
         print("ERROR, Metodo no encontrada")
-print(str(contParametros("qasa,xasa,e")))

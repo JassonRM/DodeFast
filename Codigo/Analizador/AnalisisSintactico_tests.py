@@ -163,8 +163,10 @@ def p_matematicas(p):
     | INI LPARENT ID COMA NUMBER RPARENT
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
+def p_error(p):
+    print("ERROR DE SINTAXIS:\n" +str(p)+"\nLINEA NUMERO: "+str(p.lineno -8))
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL juan DEFAULT 100; DCL juan DEFAULT 10;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n Cuando  \n juan > 12 EnTons \n {  } \n SiNo \n {  } \n Fin-EnCaso ;\n  \n  Final \n Proc Hola (a) DCL x DEFAULT 100 ; Inicio:  Final; Proc jesus () DCL x DEFAULT 100 ; Inicio:  Final; ")
+result = parser.parse("Inicio DCL juan DEFAULT 100;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final \n Proc Hola (a) DCL x DEFAULT 100 ; Inicio:  Final; Proc jesus () DCL y DEFAULT 100 ; Inicio:  Final; ")
 print(result)
 listMet(funciones)
 listvar(variables)
