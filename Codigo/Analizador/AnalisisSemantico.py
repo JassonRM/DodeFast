@@ -36,27 +36,6 @@ def pDesiguales(var, simbolo,comp):
         return x<=comp
     elif simbolo=="=":
         return x==comp
-def addVar(a,var):
-    i=0
-    while i<len(a):
-        if a[i].name==var.name:
-            print("REPETIDO")
-            a[i].value=var.value
-            break
-        i=i+1
-    if i==len(a):
-        a.append(var)
-def addf(a,met):
-    i=0
-    while i<len(a):
-        if a[i].name==met.name:
-            print("REPETIDO")
-            a[i].parametros=met.parametros
-            a[i].cuerpo=met.cuerpo
-            break
-        i=i+1
-    if i==len(a):
-        a.append(met)
 def buscarVar(x):
     y=None
     for i in range(len(variables)):
@@ -73,7 +52,36 @@ def buscarMetodos(x):
             return y
     if y == None:
         print("ERROR, Metodo no encontrada")
+
 def ejecutar(tupla):
-    for i in range(len(tupla)):
-        if tupla[i]=="Inicio":
-            ejecutar(tupla[i])
+    print(tupla)
+    if isinstance(tupla, int):
+        return None
+    elif tupla == None:
+        return None
+    for i in range(len(tupla)-1):
+        if tupla[0]=="Inicio":
+            ejecutar(tupla[i+1])
+        elif tupla[0]=="DCL":
+            if len(tupla)==4:
+                variable=var()
+                variable.name=tupla[1]
+                variable.value=0
+                variables.append(variable)
+            elif len(tupla)==6:
+                variable = var()
+                variable.name = tupla[1]
+                variable.value = tupla[3]
+                variables.append(variable)
+            ejecutar(tupla[i+1])
+        elif tupla[0]=="EnCaso":
+            ejecutar(tupla[i+1])
+        elif tupla[0]=="Cuando":
+            condicion=pDesiguales(tupla[1],tupla[2],tupla[3])
+            if condicion:
+                print("CIERTO")
+                ejecutar(tupla[6])
+                break
+            ejecutar(tupla[i+1])
+
+ejecutar(result)

@@ -151,5 +151,5 @@ def p_matematicas(p):
 def p_error(p):
     print("ERROR DE SINTAXIS: \n"+str(p)+"\nLINEA :"+str(p.lineno-8))
 parser = yacc.yacc()
-result = parser.parse("Inicio DCL juan DFAULT 100; DCL juan DEFAULT 10;\n EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final")
+result = parser.parse("Inicio DCL juan DEFAULT 100;  EnCaso \n Cuando  \n juan > 12 EnTons \n {  } \n  SiNo \n {  } \n Fin-EnCaso ; \n  Final")
 print(result)
