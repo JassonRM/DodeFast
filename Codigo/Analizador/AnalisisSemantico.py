@@ -135,13 +135,30 @@ def parseEnCaso(tupla):
     for i in range(len(tupla)):
         if isinstance(tupla[i], tuple):
             parseEnCaso(tupla[i])
-        if tupla[i]=="Cuando":
+        elif tupla[i]=="EnCaso":
+            ejecutar(tupla[i])
+        elif tupla[i]=="Cuando":
             valor=pDesiguales(tupla[1],tupla[2],tupla[3])
             if valor:
                 condicion=False
                 ejecutar(tupla[6])
-        if tupla[i]=="SiNo" and condicion:
+        elif tupla[i]=="SiNo" and condicion:
             ejecutar(tupla[4])
+def parseEnCaso2(var,tupla):
+    condicion=True
+    for i in range(len(tupla)):
+        if isinstance(tupla[i], tuple):
+            parseEnCaso2(var,tupla[i])
+        elif tupla[i]=="EnCaso":
+            ejecutar(tupla[i])
+        elif tupla[i]=="Cuando":
+            valor=pDesiguales(var,tupla[1],tupla[2])
+            if valor:
+                print("#"+str(tupla[5]))
+                condicion=False
+                ejecutar(tupla[5])
+        elif tupla[i]=="SiNo" and condicion:
+            ejecutar(tupla[5])
 def ejecutar(tupla):
     print(tupla)
     if isinstance(tupla, int):
@@ -177,7 +194,10 @@ def ejecutar(tupla):
         elif tupla[i]=="DEC":
             decrementar(tupla[2],int(tupla[4]))
         elif tupla[i]=="EnCaso":
-            parseEnCaso(tupla[1])
+            if isinstance(tupla[1],tuple):
+                parseEnCaso(tupla[1])
+            else:
+                parseEnCaso2(tupla[1],tupla[2])
             break
         elif tupla[i]=="Final":
             print("FIN DE CODIGO")
