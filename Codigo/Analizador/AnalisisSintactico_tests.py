@@ -4,14 +4,14 @@ def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final procedimiento
     '''
     p[0]=(p[1],p[2],p[3],p[4],p[5])
-def p_caso(p):
+def p_casos(p):
     ''' casos : EnCaso cuandos SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM sentencias
     | EnCaso ID cuandos_5 SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM sentencias
     '''
     if len(p)==9:
-        p[0] =(p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8])
+        p[0] =((p[1],p[2],p[3],p[4],p[5],p[6],p[7]),p[8])
     else:
-        p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9])
+        p[0] = ((p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8]),p[9])
 def p_desigualdades(p):
     ''' desigualdades : EQUAL
     | GT
@@ -158,6 +158,6 @@ def purba(lolol):
 purba(23)
 
 parser = yacc.yacc()
-parseo= parser.parse("Inicio DCL juan DEFAULT 100; DCL marco DEFAULT 100; Llamar Hola (juan,marco)  ; Llamar hello(marco)  ; Final Proc Hola(a,b) Inicio: Inc(b,2) Inc(a,5) Final; Proc hello(a) DCL meme DEFAULT 10; Inicio: Ini(a,4) Final;")
+parseo= parser.parse("Inicio DCL juan DEFAULT 100; DCL marco DEFAULT 100; EnCaso Cuando juan<50 EnTons { Inc(juan,100) } Cuando juan<150 EnTons { Inc(juan,50) } SiNo { Ini(juan,50)} Fin-EnCaso ; Llamar Hola (juan,marco)  ; Llamar hello(marco)  ; Final Proc Hola(a,b) Inicio: Inc(b,2) Inc(a,5) Final; Proc hello(a) DCL juan DEFAULT 10; Inicio: Ini(a,4) Final;")
 result=parseo[0:4]
 procedimientos=parseo[4]

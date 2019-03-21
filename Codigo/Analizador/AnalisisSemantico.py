@@ -28,6 +28,12 @@ def parseProc(tupla):
             procedi.name=tupla[1]
             procedi.parametros=tupla[3]
             procedi.cuerpo = (tupla[5],tupla[8])
+            for i in range(len(procedi.parametros)):
+                if procedi.parametros[i] != ",":
+                    vari = var()
+                    vari.name = procedi.parametros[i]
+                    procedi.variables.append(vari)
+                    variables.append(vari)
             addfunc(procedi)
         elif tupla[i]=="Final":
             print("FINAL PROCEDIMIENTO")
@@ -110,12 +116,6 @@ def iniciar(var,num):
     x=buscarVar(var)
     x.value=num
 def parseLlama(proc,args):
-    for i in range(len(proc.parametros)):
-        if proc.parametros[i]!=",":
-            vari=var()
-            vari.name=proc.parametros[i]
-            proc.variables.append(vari)
-            variables.append(vari)
     para=[]
     if isinstance(args, str):
         para.append(buscarVar(args))
@@ -130,6 +130,18 @@ def parseLlama(proc,args):
         para[i].value=proc.variables[i].value
     for i in range(len(proc.variables)):
         delete_var(proc.variables[i])
+def parseEnCaso(tupla):
+    condicion=True
+    for i in range(len(tupla)):
+        if isinstance(tupla[i], tuple):
+            parseEnCaso(tupla[i])
+        if tupla[i]=="Cuando":
+            valor=pDesiguales(tupla[1],tupla[2],tupla[3])
+            if valor:
+                condicion=False
+                ejecutar(tupla[6])
+        if tupla[i]=="SiNo" and condicion:
+            ejecutar(tupla[4])
 def ejecutar(tupla):
     print(tupla)
     if isinstance(tupla, int):
@@ -156,20 +168,17 @@ def ejecutar(tupla):
             parse_repita(tupla)
         elif tupla[i] == 'Desde':
             parse_desde(tupla)
-        elif tupla[i]=="EnCaso":
-           print("ejecutar ENcaso"),
         elif tupla[i] == 'Mover':
             instrucciones.parsear_intruccion(tupla)
-        elif tupla[i]=="Cuando":
-            condicion=pDesiguales(tupla[1],tupla[2],tupla[3])
-            if condicion:
-                ejecutar("Cuando")
         elif tupla[i]=="INC":
             incrementar(tupla[2],int(tupla[4]))
         elif tupla[i]=="INI":
             iniciar(tupla[2],int(tupla[4]))
         elif tupla[i]=="DEC":
             decrementar(tupla[2],int(tupla[4]))
+        elif tupla[i]=="EnCaso":
+            parseEnCaso(tupla[1])
+            break
         elif tupla[i]=="Final":
             print("FIN DE CODIGO")
         elif tupla[i]=="Llamar":
@@ -204,7 +213,11 @@ def parse_desde(tupla):
         incrementar(variable.name,1)
     delete_var(variable)
 def delete_var(variable):
-    variables.remove(variable)
+    try:
+        variables.remove(variable)
+    except:
+        print("e")
+
 parseProc(procedimientos)
 ejecutar(result)
 print("LISTA DE VARIABLES")
