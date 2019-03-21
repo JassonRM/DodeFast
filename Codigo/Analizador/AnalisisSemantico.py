@@ -236,10 +236,16 @@ def delete_var(variable):
     try:
         variables.remove(variable)
     except:
-        print("e")
+        print("")
 
 parseProc(procedimientos)
 ejecutar(result)
+for i in range(len(funciones)):
+    for x in range(len(funciones[i].variables)):
+        try:
+            delete_var(funciones[i].variables[x])
+        except:
+            print("")
 print("LISTA DE VARIABLES")
 listvar(variables)
 print("LISTA DE PROCEDIMIENTOS")

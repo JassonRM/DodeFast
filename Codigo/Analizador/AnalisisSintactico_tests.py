@@ -156,9 +156,10 @@ def purba(lolol):
     else:
         print("LOL")
 purba(23)
-
+archivo = open("codigo.txt")
+test=archivo.read()
+archivo.close()
 parser = yacc.yacc()
-parseo= parser.parse("Inicio DCL juan DEFAULT 100; DCL marco DEFAULT 100; EnCaso juan Cuando >50 EnTons { Inc(juan,100) } Cuando <150 EnTons { Inc(juan,50) } SiNo { Ini(juan,50)} Fin-EnCaso ; Llamar Hola (juan,marco)  ; Llamar hello(marco)  ; Final Proc Hola(a,b) Inicio: Inc(b,2) Inc(a,5) Final; Proc hello(a) DCL juan DEFAULT 10; Inicio: Ini(a,4) Final;")
-print("33333333333"+str(parseo))
+parseo= parser.parse(test)
 result=parseo[0:4]
 procedimientos=parseo[4]
