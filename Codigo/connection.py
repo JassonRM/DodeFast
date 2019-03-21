@@ -1,5 +1,4 @@
 import serial
-import time
 
 class Connection:
     def __init__(self, port):

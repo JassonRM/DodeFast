@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from mainwindow import Ui_MainWindow
 from connection import Connection
+from server import Server
 import sys
 
 

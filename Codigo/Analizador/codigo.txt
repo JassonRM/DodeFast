@@ -1,0 +1,24 @@
+Inicio
+DCL juan DEFAULT 100;
+DCL marco DEFAULT 100;
+EnCaso juan
+Cuando >50 EnTons {
+Inc(juan,100) }
+Cuando <150 EnTons {
+ Inc(juan,50) }
+ SiNo {
+ Ini(juan,50)}
+ Fin-EnCaso ;
+ Llamar Hola (juan,marco);
+ Llamar hello(marco);
+ Final
+ Proc Hola(a,b)
+ Inicio:
+ Inc(b,2)
+ Inc(a,5)
+ Final;
+ Proc hello(a)
+ DCL juan DEFAULT 10;
+ Inicio:
+ Ini(a,4)
+ Final;

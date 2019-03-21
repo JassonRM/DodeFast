@@ -1,12 +1,12 @@
 import ply.lex as lex
 reservadas=['DCL', 'EnCaso', 'Cuando','EnTons', 'SiNo', 'FINENCASO', 'Repita', 'HastaEncontrar', 'Desde', 'Hasta',
               'Haga', 'FINDESDE', 'Llamar','Inicio', 'Final', 'Proc','DEFAULT','COMA','DPUNTO','MOVER','INC','INI','ALEATORIO','DEC']
-movimientos=['AF','A','F','DFA','IFA','DFB','IFB','DAA', 'IAA','DAB','IAB','AA']
+movimientos=['AF','A','F','DFA','IFA','DFB','IFB','DAA', 'IAA','DAB','IAB','AA',"NONE"]
 tokens = movimientos+reservadas+['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
-          'DIVIDE', 'LPARENT', 'RPARENT','NUMBER','RKEY','LKEY','SEMMICOLOM' ,'ASSIGN']
+          'DIVIDE', 'LPARENT', 'RPARENT','NUMBER','RKEY','LKEY','SEMMICOLOM' ]
 t_ignore = '\t '
 t_PLUS = r'\+'
-t_ASSIGN = r'='
+t_EQUAL = r'='
 t_LKEY=r'\{'
 t_RKEY=r'\}'
 t_COMA=r','
@@ -14,7 +14,6 @@ t_DPUNTO=r':'
 t_MINUS = r'\-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
-t_EQUAL = r'=='
 t_GT = r'>'
 t_LT = r'<'
 t_NE = r'<>'
@@ -27,10 +26,12 @@ def t_Llamar(t):
     r'Llamar'
     t.value='Llamar'
     t.type='Llamar'
+    return t
 def t_Proc(t):
     r'Proc'
     t.value='Proc'
     t.type='Proc'
+    return t
 def Repita(t):
     r'Repita'
     t.value = "Repita"
@@ -97,7 +98,6 @@ def t_Ini(t):
     t.value = "INI"
     t.type = "INI"
     return t
-
 def t_Inc(t):
     r'Inc'
     t.value = "INC"
@@ -130,7 +130,7 @@ def t_ID(t):
         t.type = t.value
     return t
 def t_error(t):
-    print('Caracter invalido ' + t.value[0])
+    print('CARACTER INVALIDO' + t.value[0])
     t.lexer.skip(1)
 def t_newLine(t):
     r'\n+'
@@ -140,7 +140,7 @@ def t_NUMBER(t):
     t.value=int(t.value)
     return t
 analizador = lex.lex()
-analizador.input("Inicio DCL B DEFAULT 100; \n EnCaso \n Cuando  \n juan < 12 EnTons \n { } \n  SiNo \n {  } \n Fin-EnCaso ; \n Final")
+analizador.input("Inico DCL B DEFAULT 100; \n EnCaso \n Cuando  \n juan < 12 EnTons \n { } Proc \n  SiNo \n {  } \n Fin-EnCaso ; \n Final Proc Holaa(a)")
 
 while True:
     tok = analizador.token()

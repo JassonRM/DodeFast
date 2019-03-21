@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:core';
+import 'dart:io';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  List<dynamic> code = [];
+  var playing = false;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +40,7 @@ class MyApp extends StatelessWidget {
                     child: Icon(
                       Icons.stop,
                     ),
-                    onPressed: _play,
+                    onPressed: _stop,
                     color: Colors.red
                 ),
                 SizedBox(height: 50),
@@ -43,7 +50,7 @@ class MyApp extends StatelessWidget {
                     child: Icon(
                       Icons.refresh,
                     ),
-                    onPressed: _play,
+                    onPressed: _reload,
                     color: Colors.yellow
                 )
               ],
@@ -55,8 +62,29 @@ class MyApp extends StatelessWidget {
   }
 
 
-  _play(){
-    print("Hola");
+  _play() async{
+    if (code.isEmpty) {
+      print("No hay codigo");
+    } else {
+      playing = true;
+      var counter = 0;
+      while (playing && counter < code.length) {
+        print(code[counter]);
+        counter++;
+        await new Future.delayed(Duration(seconds: 2));
+      }
+    }
   }
 
+  _stop() async{
+    playing = false;
+    print("Stopping");
+  }
+
+  _reload() async {
+    final response = await http.get("http://localhost:5000/code");
+    String stringResponse = response.body.replaceAll("\\", "");
+    String json = stringResponse.substring(1, stringResponse.length - 2);
+    code = jsonDecode(json);
+  }
 }
