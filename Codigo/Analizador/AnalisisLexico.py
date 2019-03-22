@@ -27,6 +27,71 @@ def t_Llamar(t):
     t.value='Llamar'
     t.type='Llamar'
     return t
+# def t_A(t):
+#     r'A'
+#     t.value = 'A'
+#     t.type = 'A'
+#     return t
+# # def t_F(t):
+# #     r'F'
+# #     t.value = 'F'
+# #     t.type = 'F'
+# #     return t
+# def t_DFA(t):
+#     r'DFA'
+#     t.value = 'DFA'
+#     t.type = 'DFA'
+#     return t
+# def t_IFA(t):
+#     r'IFA'
+#     t.value = 'IFA'
+#     t.type = 'IFA'
+#     return t
+# def t_DFB(t):
+#     r'DFB'
+#     t.value = 'DFB'
+#     t.type = 'DFB'
+#     return t
+# def t_IFB(t):
+#     r'IFB'
+#     t.value = 'IFB'
+#     t.type = 'IFB'
+#     return t
+# def t_DAA(t):
+#     r'DAA'
+#     t.value = 'DAA'
+#     t.type = 'DAA'
+#     return t
+# def t_AF(t):
+#     r'AF'
+#     t.value='AF'
+#     t.type='AF'
+#     return t
+# def t_IAA(t):
+#     r'IAA'
+#     t.value='IAA'
+#     t.type='IAA'
+#     return t
+# def t_DAB(t):
+#     r'DAB'
+#     t.value='DAB'
+#     t.type='DAB'
+#     return t
+# def t_IAB(t):
+#     r'IAB'
+#     t.value='IAB'
+#     t.type='IAB'
+#     return t
+# def t_AA(t):
+#     r'AA'
+#     t.value='AA'
+#     t.type='AA'
+#     return t
+def t_HastaEncontrar(t):
+    r'HastaEncontrar'
+    t.value = "HastaEncontrar"
+    t.type = "HastaEncontrar"
+    return t
 def t_Proc(t):
     r'Proc'
     t.value='Proc'
@@ -52,11 +117,7 @@ def t_Haga(t):
     t.value = "Haga"
     t.type = "Haga"
     return t
-def t_HastaEncontrar(t):
-    r'HastaEncontrar'
-    t.value = "HastaEncontrar"
-    t.type = "HastaEncontrar"
-    return t
+
 def t_FinEnCaso(t):
     r'Fin-EnCaso'
     t.value = "FINENCASO"

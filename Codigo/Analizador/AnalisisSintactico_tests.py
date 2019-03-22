@@ -80,14 +80,14 @@ def p_procedimiento(p):
         p[0]=p[1]
 def p_repita(p):
     '''
-    repeticion_R : Repita sentencias HastaEncontrar ID desigualdades NUMBER sentencias
+    repeticion_R : Repita sentencias HastaEncontrar ID desigualdades NUMBER  SEMMICOLOM sentencias
     '''
-    p[0] = (p[1], p[2], p[3], p[4], p[5], p[6], p[7])
+    p[0] = (p[1], p[2], p[3], p[4], p[5], p[6], p[7],p[8])
 def  p_repita_2(p):
     '''
-    repita_2 : Desde ID DPUNTO EQUAL NUMBER Hasta ID desigualdades NUMBER sentencias FINDESDE sentencias
+    repita_2 : Desde ID DPUNTO EQUAL NUMBER Hasta ID desigualdades NUMBER Haga sentencias FINDESDE sentencias
     '''
-    p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11],p[12])
+    p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11],p[12],p[13])
 def p_funciones(p):
     '''
     funcion : matematicas sentencias
@@ -96,9 +96,10 @@ def p_funciones(p):
     '''
     if(len(p)==3):
         p[0] = (p[1],p[2])
-    elif( len(p)==4):
+    elif( len(p)==5):
         p[0] = (p[1], p[2], p[3])
     else:
+
         p[0] = (p[1], p[2], p[3], p[4], p[5])
 def p_argumento(p):
     '''
@@ -127,18 +128,7 @@ def p_sentencias(p):
     p[0] = p[1]
 def p_mov(p):
     '''
-    movimiento : AF
-    | F
-    | DFA
-    | IFA
-    |  DFB
-    | IFB
-    | A
-    | DAA
-    | IAA
-    | DAB
-    | IAB
-    | AA
+    movimiento : ID
     '''
     p[0] = p[1]
 def p_matematicas(p):
@@ -161,5 +151,6 @@ test=archivo.read()
 archivo.close()
 parser = yacc.yacc()
 parseo= parser.parse(test)
+print(parseo)
 result=parseo[0:4]
 procedimientos=parseo[4]

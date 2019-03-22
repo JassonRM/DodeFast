@@ -185,7 +185,8 @@ def ejecutar(tupla):
             parse_repita(tupla)
         elif tupla[i] == 'Desde':
             parse_desde(tupla)
-        elif tupla[i] == 'Mover':
+        elif tupla[i] == 'MOVER':
+            print("ENTRE AQUI")
             instrucciones.parsear_intruccion(tupla)
         elif tupla[i]=="INC":
             incrementar(tupla[2],int(tupla[4]))
@@ -205,20 +206,11 @@ def ejecutar(tupla):
             prod=buscarMetodos(tupla[1])
             agr=tupla[3]
             parseLlama(prod,agr)
-def check_cycle(tupla):
-    var=False
-    for i in range (len(tupla)):
-        if(isinstance(tuple,tupla[i])):
-            return check_cycle(tuple)
-        elif (tupla[0]=='Inc' or tupla[0]=='Dec' or tupla[0]=='Ini'):
-            return True
-    return var
+
 
 def parse_repita(tupla):
-    if(check_cycle(tupla)):
-        print("No tiene aumentos,disminuciones ni cambios a la variable, puede ser infinita")
     recursiones = 0
-    while( pDesiguales(tupla[3], tupla[4], tupla[5])):
+    while( not pDesiguales(tupla[3], tupla[4], tupla[5])):
         recursiones+=1
         ejecutar(tupla[1])
         if(recursiones==3000):
@@ -227,9 +219,10 @@ def parse_desde(tupla):
     variable = var()
     variable.name = tupla[1]
     variable.value = tupla[4]
-    addvar(variable)
+    addvar(variable,variables)
     while (pDesiguales(tupla[6], tupla[7], tupla[8])):
-        ejecutar(tupla[9])
+        print("ENTRE AQUI LELELELF")
+        ejecutar(tupla[10])
         incrementar(variable.name,1)
     delete_var(variable)
 def delete_var(variable):
@@ -250,3 +243,5 @@ print("LISTA DE VARIABLES")
 listvar(variables)
 print("LISTA DE PROCEDIMIENTOS")
 listMet(funciones)
+print("RESSULTADO INSTRUCCIONES")
+print(instrucciones.parseado)

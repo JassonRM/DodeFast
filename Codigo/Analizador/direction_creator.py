@@ -3,6 +3,7 @@ class Instructor:
         self.parseado = ""
     def parsear_intruccion(self,tupla):
         if(tupla[2] == "AF"):
+            print("ENTRE AQUI")
             self.parseado = self.parseado + "AF" + "\n"
         if (tupla[2] == "F"):
             self.parseado = self.parseado + "F" + "\n"

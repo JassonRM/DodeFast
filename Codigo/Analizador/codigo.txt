@@ -1,11 +1,14 @@
 Inicio
 DCL juan DEFAULT 100;
 DCL marco DEFAULT 100;
+DCL variable DEFAULT 0;
+DCL while DEFAULT 0 ;
 EnCaso juan
 Cuando >50 EnTons {
+ Mover( AF )
 Inc(juan,100) }
 Cuando <150 EnTons {
- Inc(juan,50) }
+ }
  SiNo {
  Ini(juan,50)}
  Fin-EnCaso ;
@@ -16,9 +19,27 @@ Cuando <150 EnTons {
  Inicio:
  Inc(b,2)
  Inc(a,5)
+Desde sumadora :=0 Hasta sumadora<5 Haga
+Mover( A )
+Fin-Desde
+Repita
+Mover( F)
+Inc(while,2)
+HastaEncontrar while>3;
  Final;
  Proc hello(a)
  DCL juan DEFAULT 10;
  Inicio:
  Ini(a,4)
+ EnCaso juan
+Cuando >50 EnTons {
+ Mover( AF )
+Inc(juan,100) }
+Cuando <150 EnTons {
+
+ }
+ SiNo {
+ Ini(juan,50)}
+ Fin-EnCaso ;
+
  Final;
