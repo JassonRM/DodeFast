@@ -18,6 +18,7 @@ Cuando <150 EnTons {
  Proc Hola(a,b)
  Inicio:
  Inc(b,2)
+
  Inc(a,5)
 Desde sumadora :=0 Hasta sumadora<5 Haga
 Mover( A )
