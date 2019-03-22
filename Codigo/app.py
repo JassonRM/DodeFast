@@ -13,12 +13,11 @@ class Editor(QMainWindow):
         self.show()
 
 def main():
-    # app = QApplication(sys.argv)
-    # editor = Editor()
-    # connection = Connection("COM6")
-    # connection.listen()
-    restServer = Server()
-    # sys.exit(app.exec_())
+    app = QApplication(sys.argv)
+    editor = Editor()
+    #connection = Connection("COM6")
+    #connection.listen()
+    sys.exit(app.exec_())
 
 if __name__ == '__main__':
     main()
