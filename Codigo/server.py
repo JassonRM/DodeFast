@@ -14,5 +14,5 @@ class Server:
 
 class Code(Resource):
     def get(self):
-        list = ["Forward", "Backward", "LOL", "asdf", "asfdasdf", "ahrth", "fdggf", "sgbtd"]
+        list = ["Amarillo", "Verde", "Amarillo", "Verde", "Verde", "Amarillo", "Verde"]
         return json.dumps(list)

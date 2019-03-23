@@ -1,14 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:core';
-import 'dart:io';
+import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
-void main() => runApp(MyApp());
+void main(){
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
+  runApp(MyApp());
+}
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget{
+  @override
+  _MyAppState createState() => new _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
   List<dynamic> code = [];
-  var playing = false;
+  bool _playing = false;
+  int _counter = 0;
+  var _ipAddress = "";
+
+
+  FlutterBluetoothSerial bluetooth = FlutterBluetoothSerial.instance;
+  List<BluetoothDevice> _devices = [];
+  BluetoothDevice _device;
+  bool _connected = false;
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  Future<void> initPlatformState() async {
+    List<BluetoothDevice> devices = [];
+
+    try {
+      devices = await bluetooth.getBondedDevices();
+    } on PlatformException {
+      // TODO - Error
+    }
+
+    bluetooth.onStateChanged().listen((state) {
+      switch (state) {
+        case FlutterBluetoothSerial.CONNECTED:
+          setState(() {
+            _connected = true;
+          });
+          break;
+        case FlutterBluetoothSerial.DISCONNECTED:
+          setState(() {
+            _connected = false;
+          });
+          break;
+        default:
+        // TODO
+          break;
+      }
+    });
+
+    if (!mounted) return;
+    setState(() {
+      _devices = devices;
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +83,30 @@ class MyApp extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Expanded(
+                  child: SizedBox(),
+                  flex: 2,
+                ),
                 Text("DodeFast Remote", style: TextStyle(fontSize: 30),),
-                SizedBox(height: 150,),
+                Expanded(
+                  child: SizedBox(),
+                  flex: 2,
+                ),
                 MaterialButton(
                   minWidth: 200,
                   height: 60,
-                  child: Icon(
+                  child: _playing ? Icon(
+                    Icons.pause,
+                  ) : Icon(
                     Icons.play_arrow,
                   ),
-                  onPressed: _play,
+                  onPressed: _playing ? _pause : _play,
                   color: Colors.green
                 ),
-                SizedBox(height: 50),
+                Expanded(
+                    child: SizedBox(),
+                    flex: 1,
+                ),
                 MaterialButton(
                     minWidth: 200,
                     height: 60,
@@ -43,7 +116,10 @@ class MyApp extends StatelessWidget {
                     onPressed: _stop,
                     color: Colors.red
                 ),
-                SizedBox(height: 50),
+                Expanded(
+                  child: SizedBox(),
+                  flex: 1,
+                ),
                 MaterialButton(
                     minWidth: 200,
                     height: 60,
@@ -52,7 +128,28 @@ class MyApp extends StatelessWidget {
                     ),
                     onPressed: _reload,
                     color: Colors.yellow
-                )
+                ),
+                Expanded(
+                  child: SizedBox(),
+                  flex: 1,
+                ),
+                Container(
+                  width: 200,
+                  child: TextField(
+                    onChanged: (text) {
+                      _ipAddress = text;
+                    },
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      hintText: "IP Address"
+                    ),
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  )
+                ),
+                Expanded(
+                  child: SizedBox(),
+                  flex: 2,
+                ),
               ],
             )
           )
@@ -66,25 +163,70 @@ class MyApp extends StatelessWidget {
     if (code.isEmpty) {
       print("No hay codigo");
     } else {
-      playing = true;
-      var counter = 0;
-      while (playing && counter < code.length) {
-        print(code[counter]);
-        counter++;
+      setState(() {
+        _playing = true;
+      });
+      while (_playing && _counter < code.length) {
+        _sendDode(code[_counter]);
+        setState(() {
+          _counter++;
+        });
         await new Future.delayed(Duration(seconds: 2));
+      }
+      if(_counter == code.length) {
+        _stop();
       }
     }
   }
 
+  _pause(){
+    setState(() {
+      _playing = false;
+    });
+  }
+
   _stop() async{
-    playing = false;
-    print("Stopping");
+    setState(() {
+      _playing = false;
+      _counter = 0;
+    });
   }
 
   _reload() async {
-    final response = await http.get("http://localhost:5000/code");
-    String stringResponse = response.body.replaceAll("\\", "");
-    String json = stringResponse.substring(1, stringResponse.length - 2);
-    code = jsonDecode(json);
+    //Connects bluetooth
+    _devices.forEach((device) {
+      if(device.name == "HC-06"){
+        _device = device;
+      }
+    });
+    _connect();
+
+    _stop();
+    //Connects server
+    try {
+      var server = "http://" + _ipAddress + ":5000/code";
+      final response = await http.get(server);
+      String stringResponse = response.body.replaceAll("\\", "");
+      String json = stringResponse.substring(1, stringResponse.length - 2);
+      code = jsonDecode(json);
+    } on Exception {
+      print("No conection with the server");
+    }
+  }
+
+  void _connect() {
+    bluetooth.isConnected.then((isConnected) {
+      if (!isConnected) {
+        bluetooth.connect(_device).catchError((error) {});
+      }
+    });
+  }
+
+  void _sendDode(String command) {
+    bluetooth.isConnected.then((isConnected) {
+      if (isConnected) {
+        bluetooth.write(command);
+      }
+    });
   }
 }
