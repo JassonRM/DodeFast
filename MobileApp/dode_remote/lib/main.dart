@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
   bool _playing = false;
   int _counter = 0;
   var _ipAddress = "";
+  var _errorMessage = '';
 
 
   FlutterBluetoothSerial bluetooth = FlutterBluetoothSerial.instance;
@@ -150,6 +151,7 @@ class _MyAppState extends State<MyApp> {
                   child: SizedBox(),
                   flex: 2,
                 ),
+                Text(_errorMessage)
               ],
             )
           )
@@ -193,6 +195,24 @@ class _MyAppState extends State<MyApp> {
   }
 
   _reload() async {
+    //Connects server
+    try {
+      var server = "http://" + _ipAddress + ":5000/code";
+      final response = await http.get(server);
+      if(response.statusCode == 200){
+        networkError();
+      }
+      String stringResponse = response.body.replaceAll("\\", "");
+      String json = stringResponse.substring(1, stringResponse.length - 2);
+      code = jsonDecode(json);
+      setState(() {
+        _errorMessage = "";
+      });
+    } catch(e) {
+      networkError();
+    }
+
+
     //Connects bluetooth
     _devices.forEach((device) {
       if(device.name == "HC-06"){
@@ -202,22 +222,14 @@ class _MyAppState extends State<MyApp> {
     _connect();
 
     _stop();
-    //Connects server
-    try {
-      var server = "http://" + _ipAddress + ":5000/code";
-      final response = await http.get(server);
-      String stringResponse = response.body.replaceAll("\\", "");
-      String json = stringResponse.substring(1, stringResponse.length - 2);
-      code = jsonDecode(json);
-    } on Exception {
-      print("No conection with the server");
-    }
   }
 
   void _connect() {
     bluetooth.isConnected.then((isConnected) {
       if (!isConnected) {
-        bluetooth.connect(_device).catchError((error) {});
+        bluetooth.connect(_device).catchError((error) {
+          bluetoothError();
+        });
       }
     });
   }
@@ -229,4 +241,17 @@ class _MyAppState extends State<MyApp> {
       }
     });
   }
+
+  bluetoothError() {
+    setState(() {
+      _errorMessage = "DodeFast is out of range";
+    });
+  }
+
+  networkError() {
+    setState(() {
+      _errorMessage = "DodeFast IDE could not be reached at $_ipAddress";
+    });
+  }
+
 }
