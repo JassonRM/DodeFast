@@ -10,8 +10,9 @@ class Editor(QMainWindow):
         super(Editor, self).__init__()
         self.ui = MainWindow()
         self.ui.setupUi(self)
-        self.show()
         self.ui.onLoad()
+        self.show()
+
 
 def main():
     app = QApplication(sys.argv)
