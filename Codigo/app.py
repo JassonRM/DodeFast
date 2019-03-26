@@ -17,7 +17,6 @@ class Editor(QMainWindow):
 def main():
     app = QApplication(sys.argv)
     editor = Editor()
-    # server = Server()
     sys.exit(app.exec_())
 
 if __name__ == '__main__':

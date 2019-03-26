@@ -1,9 +1,10 @@
 from mainwindow import Ui_MainWindow
-import plyparser
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from Analizador.AnalisisSintactico_tests import parse_codigo
 import os
 import highlighter
+from server import Server
 
 class MainWindow(Ui_MainWindow):
     def __init__(self):
@@ -28,11 +29,23 @@ class MainWindow(Ui_MainWindow):
 
         self.highlight = highlighter.PythonHighlighter(editor.document())
 
+        self.code = []
+        self.server = Server(self)
+        # self.server.run(self)
+
+
     def compileBtnPressed(self):
-        toks = plyparser.start(self.editorText.toPlainText())
-        for tok in toks:
-            self.consoleText.append(str(tok))
-            self.consoleText.update()
+        result = parse_codigo(self.editorText.toPlainText())
+        if result[0]:
+            self.consoleText.append(result[1])
+        else:
+            self.consoleText.append("El código fue compilado exitosamente.\nPuede ejecutarlo utilizando la aplicación DodeFast Remote para dispositivos Android.")
+            print("Resultado")
+            print(result)
+            print("End result")
+            # self.code = result[2]
+
+
 
     def openFile(self):
         fileName, _ = QFileDialog.getOpenFileName(None, "Open file", os.getenv("HOME"), "DodeFast Files (*.dode)")
@@ -45,3 +58,6 @@ class MainWindow(Ui_MainWindow):
         if fileName:
             file = open(fileName, "w")
             file.write(self.editorText.toPlainText())
+
+    def getCode(self):
+        return self.code
