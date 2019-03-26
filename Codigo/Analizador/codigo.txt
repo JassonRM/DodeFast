@@ -36,7 +36,6 @@ Cuando >50 EnTons {
  Mover( AF )
 Inc(juan,100) }
 Cuando <150 EnTons {
-
  }
  SiNo {
  Ini(juan,50)}

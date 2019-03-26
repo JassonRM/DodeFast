@@ -96,6 +96,7 @@ def buscarVar(x):
             return y
     if y==None:
         print( "ERROR, Variable no encontrada")
+        return y
 def buscarMetodos(x):
     y = None
     for i in range(len(funciones)):
@@ -104,6 +105,7 @@ def buscarMetodos(x):
             return y
     if y == None:
         print("ERROR, Metodo no encontrada")
+        return y
 def incrementar(var,num):
     print(var)
     x=buscarVar(var)
@@ -204,8 +206,12 @@ def ejecutar(tupla):
         elif tupla[i]=="Llamar":
             prod=buscarMetodos(tupla[1])
             agr=tupla[3]
-            parseLlama(prod,agr)
-
+            if prod==None:
+                return (False,"NO EXISTE EL PROCEDIMIENTO",str(tupla[1]))
+            elif contParametros(prod.parametros)!= contParametros(agr):
+                return (False,"PARAMETROS INVALIDOS",str(agr))
+            else:
+                parseLlama(prod,agr)
 
 def parse_repita(tupla):
     recursiones = 0
@@ -240,5 +246,5 @@ print("LISTA DE VARIABLES")
 listvar(variables)
 print("LISTA DE PROCEDIMIENTOS")
 listMet(funciones)
-print("RESSULTADO INSTRUCCIONES")
+print("RESULTADO INSTRUCCIONES")
 print(instrucciones.parseado)
