@@ -155,7 +155,7 @@ def parse_codigo(codigo):
     global error
     valor = analizar(codigo)
     parser = yacc.yacc()
-    parseo = parser.parse(test)
+    parseo = parser.parse(codigo)
     print(valor)
     if(valor[0]):
         return (False,valor[1])
@@ -168,12 +168,12 @@ def parse_codigo(codigo):
         resultado = ejecutar(result_2)
         return resultado
 
-purba(23)
-archivo = open("codigo.txt")
-test=archivo.read()
-archivo.close()
-print(parse_codigo(test))
-print(parse_codigo(test))
+# purba(23)
+# archivo = open("codigo.txt")
+# test=archivo.read()
+# archivo.close()
+# print(parse_codigo(test))
+# print(parse_codigo(test))
 # parser = yacc.yacc()
 #
 # parseo= parser.parse(test)
