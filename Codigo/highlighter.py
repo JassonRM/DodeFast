@@ -25,43 +25,35 @@ STYLES = {
     'operator': format('red'),
     'brace': format('darkGray'),
     'defclass': format('black', 'bold'),
-    'string': format('magenta'),
-    'string2': format('darkMagenta'),
-    'comment': format('darkGreen', 'italic'),
+    'string': format('green'),
+    'string2': format('darkGreen'),
+    'comment': format('gray', 'italic'),
     'self': format('black', 'italic'),
     'numbers': format('brown'),
 }
 
 
 class PythonHighlighter (QSyntaxHighlighter):
-    """Syntax highlighter for the Python language.
+    """Syntax highlighter for the Dodefast language.
     """
-    # Python keywords
+    # Dodefast keywords
     keywords = [
-        'and', 'assert', 'break', 'class', 'continue', 'def',
-        'del', 'elif', 'else', 'except', 'exec', 'finally',
-        'for', 'from', 'global', 'if', 'import', 'in',
-        'is', 'lambda', 'not', 'or', 'pass', 'print',
-        'raise', 'return', 'try', 'while', 'yield',
-        'None', 'True', 'False',
+        'DEFAULT', 'EnCaso', 'Fin-EnCaso', 'Cuando', 'Entons', 'SiNo',
+        'Repita', 'HastaEncontrar', 'Desde', 'Hasta', 'Haga', 'Fin-Desde',
+        'Inicio', 'Final', 'Proc', 'Llamar', 'DCL'
     ]
 
-    # Python operators
+    # Dodefast operators
     operators = [
-        '=',
         # Comparison
-        '==', '!=', '<', '<=', '>', '>=',
+        '=', '<>', '<', '<=', '>', '>=',
         # Arithmetic
-        '\+', '-', '\*', '/', '//', '\%', '\*\*',
-        # In-place
-        '\+=', '-=', '\*=', '/=', '\%=',
-        # Bitwise
-        '\^', '\|', '\&', '\~', '>>', '<<',
+        '\+', '-', '\*', '/'
     ]
 
-    # Python braces
+    # Dodefast braces
     braces = [
-        '\{', '\}', '\(', '\)', '\[', '\]',
+        '\(', '\)', '\{', '\}'
     ]
     def __init__(self, document):
         QSyntaxHighlighter.__init__(self, document)
