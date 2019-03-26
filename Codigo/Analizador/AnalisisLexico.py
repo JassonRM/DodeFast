@@ -5,6 +5,7 @@ movimientos=['AF','A','F','DFA','IFA','DFB','IFB','DAA', 'IAA','DAB','IAB','AA',
 tokens = movimientos+reservadas+['ID','EQUAL', 'GT', 'LT', 'NE', 'GTE', 'LTE', 'PLUS', 'MINUS', 'TIMES',
           'DIVIDE', 'LPARENT', 'RPARENT','NUMBER','RKEY','LKEY','SEMMICOLOM' ]
 t_ignore = '\t '
+error = (False,[])
 t_PLUS = r'\+'
 t_EQUAL = r'='
 t_LKEY=r'\{'
@@ -181,7 +182,6 @@ def t_Aleatorio(t):
     t.value = "ALEATORIO"
     t.type = "ALEATORIO"
     return t
-
 def t_FinDesde(t):
     r'Fin-Desde'
     t.value = "FINDESDE"
@@ -193,7 +193,10 @@ def t_ID(t):
         t.type = t.value
     return t
 def t_error(t):
+    global error
     print('CARACTER INVALIDO' + t.value[0])
+    error = (True,t.value[0])
+    print(error)
     t.lexer.skip(1)
 def t_newLine(t):
     r'\n+'
@@ -202,10 +205,14 @@ def t_NUMBER(t):
     r'[0-9]+'
     t.value=int(t.value)
     return t
-analizador = lex.lex()
-analizador.input("Inico DCL B DEFAULT 100; \n EnCaso \n Cuando  \n juan < 12 EnTons \n { } Proc \n  SiNo \n {  } \n Fin-EnCaso ; \n Final Proc Holaa(a)")
-
-while True:
-    tok = analizador.token()
-    if not tok : break
-    print(tok)
+def analizar(text):
+    global error
+    error = (False, [])
+    analizador = lex.lex()
+    analizador.input(text)
+    print (analizador)
+    while True:
+        tok = analizador.token()
+        if not tok : break
+        print(tok)
+    return error

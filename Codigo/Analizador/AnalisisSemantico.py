@@ -1,5 +1,4 @@
 from Analizador.direction_creator import *
-from Analizador.AnalisisSintactico_tests import result,procedimientos
 variables=[]
 funciones=[]
 instrucciones = Instructor()
@@ -231,8 +230,6 @@ def delete_var(variable):
     except:
         print("")
 
-parseProc(procedimientos)
-ejecutar(result)
 for i in range(len(funciones)):
     for x in range(len(funciones[i].variables)):
         try:

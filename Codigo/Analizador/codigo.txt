@@ -1,7 +1,7 @@
 Inicio
 DCL juan DEFAULT 100;
 DCL marco DEFAULT 100;
-DCL 3ariable DEFAULT 0;
+DCL 23iable DEFAULT 0;
 DCL while DEFAULT 0 ;
 EnCaso juan
 Cuando >50 EnTons {

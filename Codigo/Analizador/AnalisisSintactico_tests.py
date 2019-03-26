@@ -1,5 +1,9 @@
 import ply.yacc as yacc
 from Analizador.AnalisisLexico import tokens
+from  Analizador.AnalisisLexico import analizar
+from Analizador.AnalisisSemantico import parseProc,ejecutar
+parseo_aprobado = True
+error=""
 def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final procedimiento
     '''
@@ -139,18 +143,37 @@ def p_matematicas(p):
     '''
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 def p_error(p):
-    print("ERROR DE SINTAXIS: \n"+str(p)+"\nLINEA :"+str(p.lineno-8))
+    global error
+    error="Error de sintaxis:"+'\n'+str(p)+"\n LINEA :"+str(p.lineno-8)
+    print("Error de sintaxis en : \n"+str(p)+"\n LINEA :"+str(p.lineno-8))
 def purba(lolol):
     if lolol == 34:
         purba(1)
     else:
         print("LOL")
+def parse_codigo(codigo):
+    global error
+    valor = analizar(codigo)
+    parser = yacc.yacc()
+    parseo = parser.parse(test)
+    print(valor)
+    if(valor[0]):
+        return (False,valor[1])
+    if (parseo == None):
+        return [False,[error]]
+    else:
+        result_2 = parseo[0:4]
+        procedimientos_2 = parseo[4]
+        parseProc(procedimientos_2)
+        resultado = ejecutar(result_2)
+
 purba(23)
 archivo = open("codigo.txt")
 test=archivo.read()
 archivo.close()
-parser = yacc.yacc()
-parseo= parser.parse(test)
-print(parseo)
-result=parseo[0:4]
-procedimientos=parseo[4]
+print(parse_codigo(test))
+print(parse_codigo(test))
+# parser = yacc.yacc()
+#
+# parseo= parser.parse(test)
+
