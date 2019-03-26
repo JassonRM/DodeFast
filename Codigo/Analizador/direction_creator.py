@@ -1,33 +1,33 @@
 class Instructor:
     def __init__(self):
-        self.parseado = ""
+        self.parseado = []
     def parsear_intruccion(self,tupla):
         if(tupla[2] == "AF"):
             print("ENTRE AQUI")
-            self.parseado = self.parseado + "AF" + "\n"
+            self.parseado.append("AF")
         if (tupla[2] == "F"):
-            self.parseado = self.parseado + "F" + "\n"
+            self.parseado.append("F")
         if (tupla[2] == "DFA"):
-            self.parseado = self.parseado + "DFA" + "\n"
+            self.parseado.append("DFA")
         if (tupla[2] == "IFA"):
-            self.parseado = self.parseado + "IFA" + "\n"
+            self.parseado.append("IFA")
         if (tupla[2] == "DFB"):
-            self.parseado = self.parseado + "DFB" + "\n"
+            self.parseado.append("DFB")
         if (tupla[2] == "IFB"):
-            self.parseado = self.parseado + "IFB" + "\n"
+            self.parseado.append("IFB")
         if (tupla[2] == "A"):
-            self.parseado = self.parseado + "A" + "\n"
+            self.parseado.append("A")
         if (tupla[2] == "DAA"):
-            self.parseado = self.parseado + "DAA" + "\n"
+            self.parseado.append("DAA")
         if (tupla[2] == "IAA"):
-            self.parseado = self.parseado + "IAA" + "\n"
+            self.parseado.append("IAA")
         if (tupla[2] == "DAB"):
-            self.parseado = self.parseado + "DAB" + "\n"
+            self.parseado.append("DAB")
         if (tupla[2] == "IAB"):
-            self.parseado = self.parseado + "IAB" + "\n"
+            self.parseado.append("IAB")
         if (tupla[2] == "AA"):
-            self.parseado = self.parseado + "AA" + "\n"
+            self.parseado.append("AA")
         if (tupla[2] == ")"):
-            self.parseado = self.parseado + "AL" + "\n"
+            self.parseado.append("AL")
     def obtener_string(self):
         return self.parseado

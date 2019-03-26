@@ -1,7 +1,7 @@
 Inicio
 DCL juan DEFAULT 100;
 DCL marco DEFAULT 100;
-DCL variable DEFAULT 0;
+DCL 3ariable DEFAULT 0;
 DCL while DEFAULT 0 ;
 EnCaso juan
 Cuando >50 EnTons {
@@ -18,7 +18,6 @@ Cuando <150 EnTons {
  Proc Hola(a,b)
  Inicio:
  Inc(b,2)
-
  Inc(a,5)
 Desde sumadora :=0 Hasta sumadora<5 Haga
 Mover( A )

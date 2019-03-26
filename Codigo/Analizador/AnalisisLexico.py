@@ -199,7 +199,7 @@ def t_newLine(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 def t_NUMBER(t):
-    r'\d+'
+    r'[0-9]+'
     t.value=int(t.value)
     return t
 analizador = lex.lex()
