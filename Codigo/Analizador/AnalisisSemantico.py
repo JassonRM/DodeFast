@@ -209,7 +209,7 @@ def ejecutar(tupla):
             if prod==None:
                 return (False,"NO EXISTE EL PROCEDIMIENTO",str(tupla[1]))
             elif contParametros(prod.parametros)!= contParametros(agr):
-                return (False,"PARAMETROS INVALIDOS",str(agr))
+                return (False,"PARAMETROS INGRESADOS:"+str(contParametros(agr))+"\nPARAMETROS DEL PROCEDIMIENTO:"+str(contParametros(prod.parametros)),prod.name)
             else:
                 parseLlama(prod,agr)
 
