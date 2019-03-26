@@ -170,7 +170,11 @@ def parseEnCaso2(var,tupla):
                 ejecutar(tupla[5])
         elif tupla[i]=="SiNo" and condicion:
             ejecutar(tupla[5])
+error = ""
+
 def ejecutar(tupla):
+    global instrucciones
+    global error
     global Error
     if not Error:
         print(tupla)
@@ -220,12 +224,15 @@ def ejecutar(tupla):
                 agr=tupla[3]
                 if prod==None:
                     Error=True
+                    error="NO EXISTE EL PROCEDIMIENTO" + str(tupla[1])
                     return (False,"NO EXISTE EL PROCEDIMIENTO",str(tupla[1]))
                 elif contParametros(prod.parametros)!= contParametros(agr):
                     Error=True
+                    error = "NO EXISTE EL PROCEDIMIENTO" + str(tupla[1])
                     return (False,"PARAMETROS INGRESADOS:"+str(contParametros(agr))+"\nPARAMETROS DEL PROCEDIMIENTO:"+str(contParametros(prod.parametros)),prod.name)
                 else:
                     parseLlama(prod,agr)
+    return [ Error,error,instrucciones.parseado]
 
 def parse_repita(tupla):
     recursiones = 0

@@ -166,6 +166,7 @@ def parse_codigo(codigo):
         procedimientos_2 = parseo[4]
         parseProc(procedimientos_2)
         resultado = ejecutar(result_2)
+        return resultado
 
 purba(23)
 archivo = open("codigo.txt")
