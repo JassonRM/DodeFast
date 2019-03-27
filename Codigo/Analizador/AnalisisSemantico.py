@@ -211,6 +211,8 @@ def ejecutar(tupla):
             elif tupla[i] == 'Desde':
                 parse_desde(tupla)
             elif tupla[i] == 'MOVER':
+                if Error:
+                    break
                 print("ENTRE AQUI")
                 Error=instrucciones.parsear_intruccion(tupla)
                 if Error:
