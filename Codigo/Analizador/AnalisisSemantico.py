@@ -15,7 +15,9 @@ class metodos:
         self.variables=[]
 def ejecutar_aux(tupla):
     global variables
+    global instrucciones
     global funciones
+    instrucciones.parseado=[]
     variables=[]
     funciones=[]
     return ejecutar(tupla)
