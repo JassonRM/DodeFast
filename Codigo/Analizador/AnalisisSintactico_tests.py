@@ -1,9 +1,10 @@
 import ply.yacc as yacc
 from Analizador.AnalisisLexico import tokens
 from  Analizador.AnalisisLexico import analizar
-from Analizador.AnalisisSemantico import parseProc,ejecutar
+from Analizador.AnalisisSemantico import parseProc,ejecutar_aux
 parseo_aprobado = True
 error=""
+from Analizador.AnalisisSemantico import variables
 def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final procedimiento
     '''
@@ -12,6 +13,7 @@ def p_casos(p):
     ''' casos : EnCaso cuandos SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM sentencias
     | EnCaso ID cuandos_5 SiNo LKEY sentencias RKEY FINENCASO SEMMICOLOM sentencias
     '''
+
     if len(p)==10:
         p[0] =((p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8]),p[9])
     else:
@@ -52,8 +54,11 @@ def p_declaracion(p):
     '''
     declaracion : DCL ID SEMMICOLOM declaracion_2
     | DCL ID DEFAULT NUMBER SEMMICOLOM declaracion_2
+    | epsilon
     '''
-    if( len(p)==5):
+    if len(p)==2:
+        p[0]=p[1]
+    elif( len(p)==5):
         p[0]=(p[1],p[2],p[3],p[4])
 
     else:
@@ -160,12 +165,12 @@ def parse_codigo(codigo):
     if(valor[0]):
         return (False,valor[1])
     if (parseo == None):
-        return [False,[error]]
+        return [False,error]
     else:
         result_2 = parseo[0:4]
         procedimientos_2 = parseo[4]
         parseProc(procedimientos_2)
-        resultado = ejecutar(result_2)
+        resultado = ejecutar_aux(result_2)
         return resultado
 
 # purba(23)

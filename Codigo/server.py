@@ -14,7 +14,6 @@ class Server():
         app = Flask(__name__)
         api = Api(app)
         api.add_resource(Code, "/code", resource_class_kwargs={'ide': ide})
-        # app.run(host='0.0.0.0', debug=True)
         socket = SocketIO(app)
         socket.run(app, host='0.0.0.0')
 

@@ -13,6 +13,12 @@ class metodos:
         self.parametros=None
         self.cuerpo=None
         self.variables=[]
+def ejecutar_aux(tupla):
+    global variables
+    global funciones
+    variables=[]
+    funciones=[]
+    return ejecutar(tupla)
 def parseProc(tupla):
     print(tupla)
     if isinstance(tupla, int):
@@ -232,7 +238,7 @@ def ejecutar(tupla):
                     return (False,"PARAMETROS INGRESADOS:"+str(contParametros(agr))+"\nPARAMETROS DEL PROCEDIMIENTO:"+str(contParametros(prod.parametros)),prod.name)
                 else:
                     parseLlama(prod,agr)
-    return [ Error,error,instrucciones.parseado]
+    return [ not Error,error,instrucciones.parseado]
 
 def parse_repita(tupla):
     recursiones = 0

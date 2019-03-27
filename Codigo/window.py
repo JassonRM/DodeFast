@@ -31,21 +31,22 @@ class MainWindow(Ui_MainWindow):
 
         self.code = []
         self.server = Server(self)
-        # self.server.run(self)
 
 
     def compileBtnPressed(self):
-        result = parse_codigo(self.editorText.toPlainText())
-        if result[0]:
-            self.consoleText.append(result[1])
-        else:
-            self.consoleText.append("El código fue compilado exitosamente.\nPuede ejecutarlo utilizando la aplicación DodeFast Remote para dispositivos Android.")
-            print("Resultado")
-            print(result)
-            print("End result")
-            # self.code = result[2]
-
-
+        code = self.editorText.toPlainText()
+        if(code != ""):
+            result = parse_codigo(code)
+            self.consoleText.clear()
+            if result[0]:
+                self.consoleText.append("El código fue compilado exitosamente.\nPuede ejecutarlo utilizando la aplicación DodeFast Remote para dispositivos Android.")
+                self.consoleText.repaint()
+                self.code = result[2]
+                print("El codigo es ")
+                print(self.code)
+            else:
+                self.consoleText.append(result[1])
+                self.consoleText.repaint()
 
     def openFile(self):
         fileName, _ = QFileDialog.getOpenFileName(None, "Open file", os.getenv("HOME"), "DodeFast Files (*.dode)")
