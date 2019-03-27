@@ -212,7 +212,9 @@ def ejecutar(tupla):
                 parse_desde(tupla)
             elif tupla[i] == 'MOVER':
                 print("ENTRE AQUI")
-                instrucciones.parsear_intruccion(tupla)
+                Error=instrucciones.parsear_intruccion(tupla)
+                if Error:
+                    error ="Error semantico, el argumento " + tupla[2]+" no es valido"
             elif tupla[i]=="INC":
                 incrementar(tupla[2],int(tupla[4]))
             elif tupla[i]=="INI":
