@@ -13,14 +13,6 @@ class metodos:
         self.parametros=None
         self.cuerpo=None
         self.variables=[]
-def ejecutar_aux(tupla):
-    global variables
-    global instrucciones
-    global funciones
-    instrucciones.parseado=[]
-    variables=[]
-    funciones=[]
-    return ejecutar(tupla)
 def parseProc(tupla):
     print(tupla)
     if isinstance(tupla, int):
@@ -67,26 +59,28 @@ def contParametros(a):
     return i
 def addfunc(proc):
     global Error
+    global error
     i = True
     for x in range(len(funciones)):
         if funciones[x].name == proc.name:
             i = False
             print("PROCEDIMIENTO YA EXISTENTE")
             Error=True
-            return (False, "PROCEDIMIENTO YA EXISTE", proc.name)
+            error="PROCEDIMIENTO "+proc.name+" YA EXISTE"
 
     if i:
         print("PROCEDIMIENTO AGREGADA")
         funciones.append(proc)
 def addvar(a,list):
     global Error
+    global error
     i=True
     for x in range(len(list)):
         if list[x].name==a.name:
             i=False
             print("VARIABLE YA EXISTENTE")
             Error=True
-            return (False, "VARIABLE REPETIDA", a.name)
+            error="VARIABLE " +a.name +" REPETIDA"
 
     if i:
         print("VARIABLE AGREGADA")
@@ -106,6 +100,7 @@ def pDesiguales(var, simbolo,comp):
 def buscarVar(x):
     y=None
     global Error
+    global error
     for i in range(len(variables)):
         if variables[i].name==x:
             y=variables[i]
@@ -113,16 +108,19 @@ def buscarVar(x):
     if y==None:
         print( "ERROR, Variable no encontrada")
         Error = True
-        return (False,"VARIABLE NO EXISTE",x)
+        error="VARIABLE "+ x +" NO EXISTE"
 
 def buscarMetodos(x):
+    global error
+    global Error
     y = None
     for i in range(len(funciones)):
         if funciones[i].name == x:
             y = funciones[i]
             return y
     if y == None:
-        print("ERROR, Metodo no encontrada")
+        error= "ERROR, Metodo "+ x +" no encontrado"
+        Error=True
         return y
 def incrementar(var,num):
     print(var)
@@ -179,6 +177,8 @@ def parseEnCaso2(var,tupla):
         elif tupla[i]=="SiNo" and condicion:
             ejecutar(tupla[5])
 error = ""
+def compare(x,v):
+    return x==v
 
 def ejecutar(tupla):
     global instrucciones
@@ -191,59 +191,64 @@ def ejecutar(tupla):
         elif tupla == None:
             return None
         for i in range(len(tupla)):
-            if isinstance(tupla[i], tuple):
-                ejecutar(tupla[i])
-            elif tupla[i]=="Inicio":
-                print("INICIO DE CODIGO")
-            elif tupla[i]=="DCL":
-                if len(tupla)==4:
-                    variable=var()
-                    variable.name=tupla[1]
-                    variable.value=0
-                    addvar(variable,variables)
-                elif len(tupla)==6:
-                    variable = var()
-                    variable.name = tupla[1]
-                    variable.value = tupla[3]
-                    addvar(variable,variables)
-            elif tupla[i] == 'Repita':
-                parse_repita(tupla)
-            elif tupla[i] == 'Desde':
-                parse_desde(tupla)
-            elif tupla[i] == 'MOVER':
-                if Error:
+            if not Error:
+                if isinstance(tupla[i], tuple):
+                    ejecutar(tupla[i])
+                elif tupla[i]=="Inicio":
+                    print("INICIO DE CODIGO")
+                elif tupla[i]=="DCL":
+                    if len(tupla)==4:
+                        variable=var()
+                        variable.name=tupla[1]
+                        variable.value=0
+                        addvar(variable,variables)
+                    elif len(tupla)==6:
+                        variable = var()
+                        variable.name = tupla[1]
+                        variable.value = tupla[3]
+                        addvar(variable,variables)
+                elif tupla[i] == 'Repita':
+                    parse_repita(tupla)
+                elif tupla[i] == 'Desde':
+                    parse_desde(tupla)
+                elif tupla[i] == 'MOVER':
+                    if Error:
+                        break
+                    print("ENTRE AQUI")
+                    Error=instrucciones.parsear_intruccion(tupla)
+                    if Error:
+                        error ="Error semantico, el argumento " + tupla[2]+" no es valido"
+                        break
+                elif tupla[i]=="INC":
+                    incrementar(tupla[2],int(tupla[4]))
+                elif tupla[i]=="INI":
+                    iniciar(tupla[2],int(tupla[4]))
+                elif tupla[i]=="DEC":
+                    decrementar(tupla[2],int(tupla[4]))
+                elif tupla[i]=="EnCaso":
+                    if isinstance(tupla[1],tuple):
+                        parseEnCaso(tupla[1])
+                    else:
+                        parseEnCaso2(tupla[1],tupla[2])
                     break
-                print("ENTRE AQUI")
-                Error=instrucciones.parsear_intruccion(tupla)
-                if Error:
-                    error ="Error semantico, el argumento " + tupla[2]+" no es valido"
-            elif tupla[i]=="INC":
-                incrementar(tupla[2],int(tupla[4]))
-            elif tupla[i]=="INI":
-                iniciar(tupla[2],int(tupla[4]))
-            elif tupla[i]=="DEC":
-                decrementar(tupla[2],int(tupla[4]))
-            elif tupla[i]=="EnCaso":
-                if isinstance(tupla[1],tuple):
-                    parseEnCaso(tupla[1])
-                else:
-                    parseEnCaso2(tupla[1],tupla[2])
-                break
-            elif tupla[i]=="Final":
-                print("FIN DE CODIGO")
-            elif tupla[i]=="Llamar":
-                prod=buscarMetodos(tupla[1])
-                agr=tupla[3]
-                if prod==None:
-                    Error=True
-                    error="NO EXISTE EL PROCEDIMIENTO" + str(tupla[1])
-                    return (False,"NO EXISTE EL PROCEDIMIENTO",str(tupla[1]))
-                elif contParametros(prod.parametros)!= contParametros(agr):
-                    Error=True
-                    error = "NO EXISTE EL PROCEDIMIENTO" + str(tupla[1])
-                    return (False,"PARAMETROS INGRESADOS:"+str(contParametros(agr))+"\nPARAMETROS DEL PROCEDIMIENTO:"+str(contParametros(prod.parametros)),prod.name)
-                else:
-                    parseLlama(prod,agr)
+                elif tupla[i]=="Final":
+                    print("FIN DE CODIGO")
+                elif tupla[i]=="Llamar":
+                    prod=buscarMetodos(tupla[1])
+                    agr=tupla[3]
+                    if prod==None:
+                        Error=True
+                        error="NO EXISTE EL PROCEDIMIENTO " + str(tupla[1])
+                        break
+                    cont1=contParametros(prod.parametros)
+                    con2=contParametros(agr)
+                    x=compare(cont1,con2)
+                    if not x :
+                        Error=True
+                        error = "ERROR DE PARAMETROS EN " + str(tupla[1])
+                        break
+                    else:
+                        parseLlama(prod,agr)
     return [ not Error,error,instrucciones.parseado]
 
 def parse_repita(tupla):
@@ -275,6 +280,9 @@ for i in range(len(funciones)):
             delete_var(funciones[i].variables[x])
         except:
             print("")
+
+
+
 print("LISTA DE VARIABLES")
 listvar(variables)
 print("LISTA DE PROCEDIMIENTOS")

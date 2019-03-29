@@ -1,10 +1,9 @@
 import ply.yacc as yacc
 from Analizador.AnalisisLexico import tokens
 from  Analizador.AnalisisLexico import analizar
-from Analizador.AnalisisSemantico import parseProc,ejecutar_aux
+from Analizador.AnalisisSemantico import *
 parseo_aprobado = True
 error=""
-from Analizador.AnalisisSemantico import variables
 def p_inicio(p):
     '''expression : Inicio declaracion sentencias Final procedimiento
     '''
@@ -170,16 +169,23 @@ def parse_codigo(codigo):
         result_2 = parseo[0:4]
         procedimientos_2 = parseo[4]
         parseProc(procedimientos_2)
-        resultado = ejecutar_aux(result_2)
+        resultado = ejecutar(result_2)
+        global variables
+        global instrucciones
+        global funciones
+        instrucciones.parseado = []
+        variables = []
+        funciones = []
+        print(resultado)
         return resultado
 
 # purba(23)
-# archivo = open("codigo.txt")
-# test=archivo.read()
-# archivo.close()
+archivo = open("codigo.txt")
+test=archivo.read()
+archivo.close()
 # print(parse_codigo(test))
 # print(parse_codigo(test))
 # parser = yacc.yacc()
 #
-# parseo= parser.parse(test)
+parse_codigo(test)
 

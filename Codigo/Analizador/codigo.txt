@@ -5,20 +5,19 @@ DCL iable DEFAULT 0;
 DCL while DEFAULT 0 ;
 EnCaso juan
 Cuando >50 EnTons {
- Mover( AF )
+Mover( AF )
 Inc(juan,100) }
 Cuando <150 EnTons {
- }
- SiNo {
- Ini(juan,50)}
- Fin-EnCaso ;
- Llamar Hola (juan,marco);
- Llamar hello(marco);
- Final
- Proc Hola(a,b)
- Inicio:
- Inc(b,2)
- Inc(a,5)
+}
+SiNo {
+Ini(juan,50)}
+Fin-EnCaso ;
+Llamar Hola (marco,marco);
+Final
+Proc Hola(a,b)
+Inicio:
+Inc(b,2)
+Inc(a,5)
 Desde sumadora :=0 Hasta sumadora<5 Haga
 Mover( A )
 Fin-Desde
@@ -27,18 +26,17 @@ Mover( F)
 Inc(while,2)
 HastaEncontrar while>3;
  Final;
- Proc hello(a)
- DCL juan DEFAULT 10;
- Inicio:
- Ini(a,4)
- EnCaso juan
+Proc Hola(a)
+DCL juan DEFAULT 10;
+Inicio:
+Ini(a,4)
+EnCaso juan
 Cuando >50 EnTons {
  Mover( AF )
 Inc(juan,100) }
 Cuando <150 EnTons {
  }
- SiNo {
- Ini(juan,50)}
- Fin-EnCaso ;
-
- Final;
+SiNo {
+Ini(juan,50)}
+Fin-EnCaso ;
+Final;
