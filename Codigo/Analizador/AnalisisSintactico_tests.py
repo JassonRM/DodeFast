@@ -177,7 +177,7 @@ def parse_codigo(codigo):
         result_2 = parseo[0:4]
         procedimientos_2 = parseo[4]
         parseProc(procedimientos_2)
-        resultado = ejecutar(result_2)
+        resultado = ejecutar_aux(result_2)
         print(resultado)
         return resultado
 
