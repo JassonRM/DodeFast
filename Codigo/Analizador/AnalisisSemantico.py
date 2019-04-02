@@ -179,14 +179,10 @@ def parseEnCaso2(var,tupla):
 error = ""
 def compare(x,v):
     return x==v
-def ejecutar_aux(tupla):
-    global variables
-    global instrucciones
-    global funciones
-    variables=[]
-    instrucciones.parseado = []
-    funciones = []
-    return ejecutar(tupla)
+def setear_error():
+    global Error
+    Error=False
+
 def ejecutar(tupla):
     global instrucciones
     global error

@@ -2,6 +2,7 @@ import ply.yacc as yacc
 from Analizador.AnalisisLexico import tokens
 from  Analizador.AnalisisLexico import analizar
 from Analizador.AnalisisSemantico import *
+
 parseo_aprobado = True
 error=""
 def p_inicio(p):
@@ -156,12 +157,6 @@ def purba(lolol):
     else:
         print("LOL")
 def parse_codigo(codigo):
-    global variables
-    global instrucciones
-    global funciones
-    instrucciones.parseado = []
-    variables = []
-    funciones = []
     global error
     global Error
     Error=False
@@ -174,20 +169,33 @@ def parse_codigo(codigo):
     if (parseo == None):
         return [False,error]
     else:
+        setear_error()
         result_2 = parseo[0:4]
         procedimientos_2 = parseo[4]
+        print(Error)
         parseProc(procedimientos_2)
-        resultado = ejecutar_aux(result_2)
+        print(Error)
+        resultado = ejecutar(result_2)
+        print(Error)
+        global variables
+        global instrucciones
+        global funciones
+        print("ESTE ES EL ERROR")
+        print(Error)
+        instrucciones.parseado.clear()
+        variables.clear()
+        funciones.clear()
+
         print(resultado)
         return resultado
-
-# purba(23)
-#archivo = open("codigo.txt")
+#
+# # purba(23)
+# archivo = open("codigo.txt")
 # test=archivo.read()
 # archivo.close()
-# print(parse_codigo(test))
-# print(parse_codigo(test))
-# parser = yacc.yacc()
-#
+# # print(parse_codigo(test))
+# # print(parse_codigo(test))
+# # parser = yacc.yacc()
+# #
 # parse_codigo(test)
 
