@@ -156,6 +156,12 @@ def purba(lolol):
     else:
         print("LOL")
 def parse_codigo(codigo):
+    global variables
+    global instrucciones
+    global funciones
+    instrucciones.parseado = []
+    variables = []
+    funciones = []
     global error
     global Error
     Error=False
@@ -172,12 +178,6 @@ def parse_codigo(codigo):
         procedimientos_2 = parseo[4]
         parseProc(procedimientos_2)
         resultado = ejecutar(result_2)
-        global variables
-        global instrucciones
-        global funciones
-        instrucciones.parseado = []
-        variables = []
-        funciones = []
         print(resultado)
         return resultado
 
