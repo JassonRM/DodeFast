@@ -157,6 +157,8 @@ def purba(lolol):
         print("LOL")
 def parse_codigo(codigo):
     global error
+    global Error
+    Error=False
     valor = analizar(codigo)
     parser = yacc.yacc()
     parseo = parser.parse(codigo)
@@ -180,12 +182,12 @@ def parse_codigo(codigo):
         return resultado
 
 # purba(23)
-archivo = open("codigo.txt")
-test=archivo.read()
-archivo.close()
+#archivo = open("codigo.txt")
+# test=archivo.read()
+# archivo.close()
 # print(parse_codigo(test))
 # print(parse_codigo(test))
 # parser = yacc.yacc()
 #
-parse_codigo(test)
+# parse_codigo(test)
 
