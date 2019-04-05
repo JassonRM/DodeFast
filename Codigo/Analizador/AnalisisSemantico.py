@@ -109,6 +109,7 @@ def buscarVar(x):
         print( "ERROR, Variable no encontrada")
         Error = True
         error="VARIABLE "+ x +" NO EXISTE"
+        return y
 
 def buscarMetodos(x):
     global error
@@ -123,14 +124,39 @@ def buscarMetodos(x):
         Error=True
         return y
 def incrementar(var,num):
+
     print(var)
     x=buscarVar(var)
+    global Error
+    global error
+    if x==None:
+        # print( "ERROR, en funcion incrementar  "+  var +" no encontrada")
+        # Error = True
+        # error="VARIABLE "+ x +" NO EXISTE"
+        # return x
+        return
     x.value+=num
 def decrementar(var,num):
     x=buscarVar(var)
+    global Error
+    global error
+    if x==None:
+        # print( "ERROR, en funcion decrementar  "+  var +" no encontrada")
+        # Error = True
+        # error="VARIABLE "+ x +" NO EXISTE"
+        # return x
+     return
     x.value-=num
 def iniciar(var,num):
     x=buscarVar(var)
+    global Error
+    global error
+    if x==None:
+        return
+        # print( "ERROR, en funcion iniciar  "+  var +" no encontrada")
+        # Error = True
+        # error="VARIABLE "+ x +" NO EXISTE"
+        # return x
     x.value=num
 def parseLlama(proc,args):
     para=[]
