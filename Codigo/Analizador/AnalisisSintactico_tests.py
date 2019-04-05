@@ -2,7 +2,7 @@ import ply.yacc as yacc
 from Analizador.AnalisisLexico import tokens
 from  Analizador.AnalisisLexico import analizar
 from Analizador.AnalisisSemantico import *
-
+lineas=0
 parseo_aprobado = True
 error=""
 def p_inicio(p):
@@ -149,7 +149,7 @@ def p_matematicas(p):
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 def p_error(p):
     global error
-    error="Error de sintaxis:"+'\n'+str(p)+"\n LINEA :"+str(p.lineno)
+    error="Error de sintaxis:"+'\n'+str(p)+"\n LINEA :"+str(p.lineno-lineas)
     print("Error de sintaxis en : \n"+str(p)+"\n LINEA :"+str(p.lineno))
 def purba(lolol):
     if lolol == 34:
@@ -191,9 +191,11 @@ def parse_codigo(codigo):
         print(resultado)
         return resultado
 #
+def actulineas(x):
+    global lineas
+    lineas=x
+
 # # purba(23)
-# archivo = open("codigo.txt")
-# test=archivo.read()
 # archivo.close()
 # # print(parse_codigo(test))
 # # print(parse_codigo(test))

@@ -5,7 +5,8 @@ from Analizador.AnalisisSintactico_tests import parse_codigo
 import os
 import highlighter
 from server import Server
-
+from Analizador.AnalisisSintactico_tests import actulineas
+lines=0
 class MainWindow(Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -32,9 +33,10 @@ class MainWindow(Ui_MainWindow):
         self.code = []
         self.server = Server(self)
 
-
     def compileBtnPressed(self):
         code = self.editorText.toPlainText()
+        line= len(code.split("\n"))
+        actulineas(line)
         if(code != ""):
             result = parse_codigo(code)
             self.consoleText.clear()
