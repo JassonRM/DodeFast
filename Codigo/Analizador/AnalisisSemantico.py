@@ -220,7 +220,7 @@ def ejecutar(tupla):
                     print("ENTRE AQUI")
                     Error=instrucciones.parsear_intruccion(tupla)
                     if Error:
-                        error ="Error semantico, el argumento " + tupla[2]+" no es valido"
+                        error ="Error semantico, el argumento " + tupla[2]+" no es valido para la funcion MOVER"
                         break
                 elif tupla[i]=="INC":
                     incrementar(tupla[2],int(tupla[4]))
@@ -256,13 +256,21 @@ def ejecutar(tupla):
 
 def parse_repita(tupla):
     recursiones = 0
+    global Error
+    global error
     while( not pDesiguales(tupla[3], tupla[4], tupla[5])):
         recursiones+=1
         ejecutar(tupla[1])
-        if(recursiones==3000):
+        if(recursiones==300):
+            Error=True
+            error= "Error, posible ciclo en un Repita, maximo numero de recurciones es 300"
             print("Posible Ciclo")
+            break
 def parse_desde(tupla):
     variable = var()
+    recursiones=0
+    global Error
+    global error
     variable.name = tupla[1]
     variable.value = tupla[4]
     addvar(variable,variables)
@@ -270,6 +278,13 @@ def parse_desde(tupla):
         print("ENTRE AQUI LELELELF")
         ejecutar(tupla[10])
         incrementar(variable.name,1)
+        recursiones+=1
+        if recursiones==300:
+            Error = True
+            error = "Error, posible ciclo en un desde, maximo numero de recurciones es 300"
+            print("Posible Ciclo")
+            break
+
     delete_var(variable)
 def delete_var(variable):
     try:

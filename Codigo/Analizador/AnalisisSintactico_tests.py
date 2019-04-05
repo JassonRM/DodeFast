@@ -169,6 +169,11 @@ def parse_codigo(codigo):
     if (parseo == None):
         return [False,error]
     else:
+        global variables
+        global instrucciones
+        global funciones
+        instrucciones.parseado.clear()
+
         setear_error()
         result_2 = parseo[0:4]
         procedimientos_2 = parseo[4]
@@ -177,12 +182,9 @@ def parse_codigo(codigo):
         print(Error)
         resultado = ejecutar(result_2)
         print(Error)
-        global variables
-        global instrucciones
-        global funciones
+
         print("ESTE ES EL ERROR")
         print(Error)
-        instrucciones.parseado.clear()
         variables.clear()
         funciones.clear()
 

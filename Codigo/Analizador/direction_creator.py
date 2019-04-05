@@ -42,5 +42,7 @@ class Instructor:
         if (tupla[2] == ")"):
             self.parseado.append("AL")
             return False
+        else:
+            return True
     def obtener_string(self):
         return self.parseado
