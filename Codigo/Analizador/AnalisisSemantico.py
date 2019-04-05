@@ -220,7 +220,7 @@ def ejecutar(tupla):
                     print("ENTRE AQUI")
                     Error=instrucciones.parsear_intruccion(tupla)
                     if Error:
-                        error ="Error semantico, el argumento " + tupla[2]+" no es valido para la funcion MOVER"
+                        error ="Error semantico, el argumento " + tupla[2]+" no es valido para MOVER"
                         break
                 elif tupla[i]=="INC":
                     incrementar(tupla[2],int(tupla[4]))
