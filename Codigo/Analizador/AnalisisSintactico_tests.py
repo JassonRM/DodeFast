@@ -149,8 +149,8 @@ def p_matematicas(p):
     p[0] = (p[1], p[2], p[3], p[4], p[5], p[6])
 def p_error(p):
     global error
-    error="Error de sintaxis:"+'\n'+str(p)+"\n LINEA :"+str(p.lineno-8)
-    print("Error de sintaxis en : \n"+str(p)+"\n LINEA :"+str(p.lineno-8))
+    error="Error de sintaxis:"+'\n'+str(p)+"\n LINEA :"+str(p.lineno)
+    print("Error de sintaxis en : \n"+str(p)+"\n LINEA :"+str(p.lineno))
 def purba(lolol):
     if lolol == 34:
         purba(1)

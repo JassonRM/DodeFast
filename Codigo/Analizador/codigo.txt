@@ -7,12 +7,13 @@ EnCaso juan
 Cuando >50 EnTons {
 Mover( AF )
 Inc(juan,100) }
-Cuando <150 EnTons {
+Cuando =150 EnTons {
+Mover( F )
 }
 SiNo {
+Mover( A)
 Ini(juan,50)}
 Fin-EnCaso ;
-Llamar Hola (marco,marco);
 Final
 Proc Hola(a,b)
 Inicio:

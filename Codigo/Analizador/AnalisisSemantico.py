@@ -173,8 +173,9 @@ def parseLlama(proc,args):
         para[i].value=proc.variables[i].value
     for i in range(len(proc.variables)):
         delete_var(proc.variables[i])
+condicion=True
 def parseEnCaso(tupla):
-    condicion=True
+    global condicion
     for i in range(len(tupla)):
         if isinstance(tupla[i], tuple):
             parseEnCaso(tupla[i])
@@ -188,8 +189,9 @@ def parseEnCaso(tupla):
         elif tupla[i]=="SiNo" and condicion:
             ejecutar(tupla[4])
 def parseEnCaso2(var,tupla):
-    condicion=True
+    global condicion
     for i in range(len(tupla)):
+        print(tupla[i])
         if isinstance(tupla[i], tuple):
             parseEnCaso2(var,tupla[i])
         elif tupla[i]=="EnCaso":
@@ -213,6 +215,7 @@ def ejecutar(tupla):
     global instrucciones
     global error
     global Error
+    global condicion
     if not Error:
         print(tupla)
         if isinstance(tupla, int):
@@ -256,9 +259,13 @@ def ejecutar(tupla):
                     decrementar(tupla[2],int(tupla[4]))
                 elif tupla[i]=="EnCaso":
                     if isinstance(tupla[1],tuple):
-                        parseEnCaso(tupla[1])
+                        print("222222222222222222222222222"+str(tupla))
+                        condicion=True
+                        parseEnCaso(tupla)
                     else:
-                        parseEnCaso2(tupla[1],tupla[2])
+                        print("222222222222222222222222222"+str(tupla))
+                        condicion=True
+                        parseEnCaso2(tupla[1],tupla)
                     break
                 elif tupla[i]=="Final":
                     print("FIN DE CODIGO")
