@@ -7,3 +7,6 @@ Codigo/__pycache__/
 Codigo/__pycache__/
 
 Codigo/Analizador/__pycache__/
+ArduinoLibrary/.idea
+ArduinoLibrary/cmake*
+ArduinoLibrary/CMakeLists
