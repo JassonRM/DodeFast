@@ -195,7 +195,7 @@ def t_ID(t):
 def t_error(t):
     global error
     print('CARACTER INVALIDO' + t.value[0])
-    error = (True,t.value[0])
+    error = (True,"Caracter Invalido: "+t.value[0])
     print(error)
     t.lexer.skip(1)
 def t_newLine(t):
