@@ -11,32 +11,38 @@
 class DodeFast {
 
 public:
-    DodeFast(DodeFace currentFace);
+    DodeFast(DodeFace* currentFace);
     DodeFast();
 
     DodeFace* currentFace;
     Adafruit_PWMServoDriver pwm;
     unsigned long previousMillis;
-    int cw = 400;
+    int cw = 0;
     int ccw = 300;
-    int FifthRotationFactor = 5;
-    int ThirdRotationFactor = 3;
-    int SecondRotationFactor = 2;
-    /*
-    void AF();
-    void F();
-    void DFA();
-    void IFA();
-    void DFB();
-    void IFB();
-    void A();
-    void DAA();
-    void IAA();
-    void DAB();
-    void IAB();
-    void AA();
-    */
+
+
+    void _AF();
+    void _F();
+    void _DFA();
+    void _IFA();
+    void _DFB();
+    void _IFB();
+    void _A();
+    void _DAA();
+    void _IAA();
+    void _DAB();
+    void _IAB();
+    void _AA();
+
     void down();
+    void left();
+    void right();
+    void u_left();
+    void u_right();
+
+
+    void move_aux(DodeFace*, int);
+    void move1(DodeFace *left, DodeFace *right);
     void printt();
 private:
     /*
