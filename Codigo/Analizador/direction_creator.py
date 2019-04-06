@@ -39,6 +39,15 @@ class Instructor:
         if (tupla[2] == "AA"):
             self.parseado.append("AA")
             return False
+        if (tupla[2] == "P"):
+            self.parseado.append("P")
+            return False
+        if (tupla[2] == "L"):
+            self.parseado.append("L")
+            return False
+        if (tupla[2] == "K"):
+            self.parseado.append("K")
+            return False
         if (tupla[2] == ")"):
             self.parseado.append("AL")
             return False
