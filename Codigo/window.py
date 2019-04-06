@@ -13,8 +13,11 @@ class MainWindow(Ui_MainWindow):
 
     def onLoad(self):
         self.compileBtn.clicked.connect(self.compileBtnPressed)
+        self.compileBtn.setIcon(QIcon("Resources/play.png"))
         self.openBtn.clicked.connect(self.openFile)
+        self.openBtn.setIcon(QIcon("Resources/open.png"))
         self.saveBtn.clicked.connect(self.saveFile)
+        self.saveBtn.setIcon(QIcon("Resources/save.png"))
         font = QFont()
         font.setFamily("Courier")
         font.setStyleHint(QFont.Monospace)

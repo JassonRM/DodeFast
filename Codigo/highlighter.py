@@ -38,7 +38,7 @@ class PythonHighlighter (QSyntaxHighlighter):
     """
     # Dodefast keywords
     keywords = [
-        'DEFAULT', 'EnCaso', 'Fin-EnCaso', 'Cuando', 'Entons', 'SiNo',
+        'DEFAULT', 'EnCaso', 'Fin-EnCaso', 'Cuando', 'EnTons', 'SiNo',
         'Repita', 'HastaEncontrar', 'Desde', 'Hasta', 'Haga', 'Fin-Desde',
         'Inicio', 'Final', 'Proc', 'Llamar', 'DCL'
     ]
