@@ -10,3 +10,6 @@ Codigo/Analizador/__pycache__/
 ArduinoLibrary/.idea
 ArduinoLibrary/cmake*
 ArduinoLibrary/CMakeLists
+*.out
+
+Codigo/Analizador/parsetab\.py

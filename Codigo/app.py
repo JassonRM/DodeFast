@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtGui import QIcon
 from window import MainWindow
 from connection import Connection
 from server import Server
@@ -16,6 +17,7 @@ class Editor(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon("Resources/icon.png"))
     editor = Editor()
     sys.exit(app.exec_())
 

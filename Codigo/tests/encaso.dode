@@ -1,0 +1,16 @@
+Inicio
+DCL ook DEFAULT 24;
+
+EnCaso ook
+	Cuando > 10 EnTons{
+		Mover(AF)
+		Mover(DFA)
+	}
+	SiNo{
+		Mover(DFB)
+		Mover(IFB)
+	}
+Fin-EnCaso;
+
+Final
+

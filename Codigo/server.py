@@ -7,8 +7,9 @@ from flask_socketio import SocketIO, emit
 
 class Server():
     def __init__(self, ide):
-        Thread(target=self.run, args=(ide,)).start()
-        print("Ya se inicio el thread")
+        serverThread = Thread(target=self.run, args=(ide,))
+        serverThread.daemon = True
+        serverThread.start()
 
     def run(self, ide):
         app = Flask(__name__)

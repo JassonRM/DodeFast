@@ -41,12 +41,14 @@ class MainWindow(Ui_MainWindow):
             result = parse_codigo(code)
             self.consoleText.clear()
             if result[0]:
+                self.consoleText.setTextColor(QColor(0, 255, 0))
                 self.consoleText.append("El código fue compilado exitosamente.\nPuede ejecutarlo utilizando la aplicación DodeFast Remote para dispositivos Android.")
                 self.consoleText.repaint()
                 self.code = result[2]
                 print("El codigo es ")
                 print(self.code)
             else:
+                self.consoleText.setTextColor(QColor(255, 0, 0))
                 self.consoleText.append(result[1])
                 self.consoleText.repaint()
 
