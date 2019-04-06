@@ -91,12 +91,12 @@ def p_repita(p):
     '''
     repeticion_R : Repita sentencias HastaEncontrar ID desigualdades NUMBER  SEMMICOLOM sentencias
     '''
-    p[0] = (p[1], p[2], p[3], p[4], p[5], p[6], p[7],p[8])
+    p[0] = ((p[1], p[2], p[3], p[4], p[5], p[6], p[7]),p[8])
 def  p_repita_2(p):
     '''
-    repita_2 : Desde ID DPUNTO EQUAL NUMBER Hasta ID desigualdades NUMBER Haga sentencias FINDESDE sentencias
+    repita_2 : Desde ID DPUNTO EQUAL NUMBER Hasta  NUMBER Haga sentencias FINDESDE sentencias
     '''
-    p[0] = (p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10],p[11],p[12],p[13])
+    p[0] = ((p[1],p[2],p[3],p[4],p[5],p[6],p[7],p[8],p[9],p[10]),p[11])
 def p_funciones(p):
     '''
     funcion : matematicas sentencias

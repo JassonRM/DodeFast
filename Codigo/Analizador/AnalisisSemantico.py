@@ -86,6 +86,12 @@ def addvar(a,list):
         print("VARIABLE AGREGADA")
         list.append(a)
 def pDesiguales(var, simbolo,comp):
+    print("ESTA FUE LA VAR XD")
+    print(var)
+    y =buscarVar(var)
+    print((y))
+    if(y==None):
+        return
     x=int(buscarVar(var).value)
     if simbolo==">":
         return x>comp
@@ -124,7 +130,7 @@ def buscarMetodos(x):
         Error=True
         return y
 def incrementar(var,num):
-
+    print("ESTA FUE LA VAR XD")
     print(var)
     x=buscarVar(var)
     global Error
@@ -241,8 +247,10 @@ def ejecutar(tupla):
                         addvar(variable,variables)
                 elif tupla[i] == 'Repita':
                     parse_repita(tupla)
+                    break
                 elif tupla[i] == 'Desde':
                     parse_desde(tupla)
+                    break
                 elif tupla[i] == 'MOVER':
                     if Error:
                         break
@@ -292,6 +300,8 @@ def parse_repita(tupla):
     global Error
     global error
     while( not pDesiguales(tupla[3], tupla[4], tupla[5])):
+        if(Error):
+            return
         recursiones+=1
         ejecutar(tupla[1])
         if(recursiones==300):
@@ -307,9 +317,13 @@ def parse_desde(tupla):
     variable.name = tupla[1]
     variable.value = tupla[4]
     addvar(variable,variables)
-    while (pDesiguales(tupla[6], tupla[7], tupla[8])):
+    if(Error):
+        return
+    while (not pDesiguales(tupla[1], "=", tupla[6])):
+        if(Error):
+            return
         print("ENTRE AQUI LELELELF")
-        ejecutar(tupla[10])
+        ejecutar(tupla[8])
         incrementar(variable.name,1)
         recursiones+=1
         if recursiones==300:
